@@ -1,0 +1,16 @@
+<ion-navbar *navbar>
+    <ion-title>Latest News</ion-title>
+</ion-navbar>
+
+<ion-content class="Category-news">
+    <ion-list>
+        <ion-item *ngFor="#news of cachedNews">
+            <ion-thumbnail item-left>
+                <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50" />
+            </ion-thumbnail>
+            <h2>{{news.title}}</h2>
+            <p>{{news.classname}}</p>
+            <button clear item-right (click)="goToDetails(news.objectId)">View</button>
+        </ion-item>
+    </ion-list>
+</ion-content>
