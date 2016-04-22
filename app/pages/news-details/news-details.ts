@@ -1,4 +1,4 @@
-import {Page, NavParams} from "ionic-angular";
+import {Page, NavController, NavParams, Loading} from "ionic-angular";
 import {Http, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
@@ -6,10 +6,13 @@ import 'rxjs/add/operator/map';
     templateUrl: "build/pages/news-details/news-details.page.html",
 })
 export class NewsDetailsPage {
-    public newsDetails: Object;
+    public newsDetails: Object = {
+        newsTitle: '',
+        longContent: ''
+    };
     private objectId: string;
 
-    constructor(private _http: Http, private _navParams: NavParams) {
+    constructor(private _http: Http, private _nav: NavController, private _navParams: NavParams) {
 
     }
 
@@ -19,19 +22,26 @@ export class NewsDetailsPage {
     }
 
     private getNewsDetails() {
+        let loading = Loading.create({
+            content: 'Please wait...'
+        });
+
+        this._nav.present(loading);
+
         let headers = new Headers();
         headers.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
         headers.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
-        headers.append("X-Parse-Session-Token", "r:RnQWzeLiYXD5CkF21EypBmx6H");
 
-        this._http.get(`https://api.parse.com/1/classes/News?where={"status":1,"objectId":"${this.objectId}"}`, {
+        this._http.get(`https://api.parse.com/1/classes/News?where={"objectId":"${this.objectId}"}`, {
             headers: headers
         }).map(res => res.json())
-            .subscribe(data => this.newsDetails = data.results,
+            .subscribe(data => this.newsDetails = data.results[0],
             (err) => console.log(err),
             () => {
                 console.log(this.newsDetails);
+                this.newsDetails.longContent = JSON.parse(this.newsDetails.longContent)[1].text;
                 console.log("Success");
+                loading.dismiss();
             });
     }
 }

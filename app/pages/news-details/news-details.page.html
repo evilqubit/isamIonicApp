@@ -7,25 +7,10 @@
         <img src="https://placeholdit.imgix.net/~text?txtsize=19&txt=200%C3%97200&w=200&h=200" />
         <ion-card-content>
             <ion-card-title>
-                News Title
+                {{newsDetails.newsTitle}}
             </ion-card-title>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ex sapien, malesuada eget vulputate at, congue quis sapien.
-                Cras at eleifend augue. Curabitur elit sem, aliquet dignissim vestibulum nec, pretium in ligula. Sed nibh
-                eros, lobortis et malesuada in, cursus blandit odio. Phasellus a egestas ante. Sed enim libero, suscipit
-                a erat sit amet, consectetur condimentum lectus. Integer volutpat in purus quis congue. Quisque placerat
-                erat ut sagittis facilisis. Curabitur quis scelerisque nunc. Vestibulum ante ipsum primis in faucibus orci
-                luctus et ultrices posuere cubilia Curae; Pellentesque a porttitor lectus, vitae suscipit lectus. Sed et
-                elit ac ligula posuere tempus. Fusce sagittis est et orci ornare condimentum. Vivamus quis urna sapien. Aliquam
-                quis maximus urna, eget imperdiet neque. Curabitur volutpat, lectus ut tempus ornare, nunc magna lacinia
-                metus, eget interdum magna mauris eu lacus. Integer vitae condimentum urna. Curabitur purus lectus, eleifend
-                et rhoncus nec, sagittis in arcu. Vestibulum non ipsum eget tellus dapibus luctus. Maecenas in massa orci.
-                Sed id quam facilisis, interdum ex ac, gravida dui. Vestibulum dignissim fermentum nibh sit amet aliquam.
-                Aliquam sem erat, elementum aliquam porta sed, sagittis et sem. Maecenas gravida est porta ex hendrerit condimentum.
-                Sed mollis urna tincidunt, faucibus ligula sed, elementum enim. Nulla aliquam, odio a consectetur hendrerit,
-                est nisl dapibus justo, eget suscipit lorem odio eget orci. Pellentesque habitant morbi tristique senectus
-                et netus et malesuada fames ac turpis egestas.
-            </p>
+            <div [innerHTML]="newsDetails.longContent">
+            </div>
         </ion-card-content>
     </ion-card>
 </ion-content>

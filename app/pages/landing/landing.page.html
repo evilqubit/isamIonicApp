@@ -11,7 +11,21 @@
 <ion-content padding class="getting-started">
 
     <ion-searchbar></ion-searchbar>
-    <ion-list>
+    <ion-list *ngFor="#category of response" >
+        <ion-row *ngIf="category.subcat">
+            <ion-col width-100>
+                <ion-list-header (click)="showCategoryNews(category.categoryName, category.objectId)">
+                    {{category.categoryName}}
+                </ion-list-header>
+                <ion-slides class="Landing-categorySlider">
+                    <ion-slide *ngFor="#object of category.subcat; #i = index" class="Landing-categoryItemSlide" [navPush]="categoryNewsPage">
+                        <h2>Item {{i}}</h2>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+    <!--<ion-list>
         <ion-row>
             <ion-col width-100>
                 <ion-list-header [navPush]="categoryNewsPage">
@@ -251,5 +265,5 @@
                 </ion-slides>
             </ion-col>
         </ion-row>
-    </ion-list>
+    </ion-list>-->
 </ion-content>

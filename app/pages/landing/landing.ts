@@ -1,4 +1,6 @@
-import {Page} from 'ionic-angular';
+import {Page, NavController} from 'ionic-angular';
+import {Http, Headers} from 'angular2/http';
+import 'rxjs/add/operator/map';
 
 //Custom imports
 import {CategoriesListPage} from "../categories-list/categories-list";
@@ -12,5 +14,33 @@ export class LandingPage {
     public categoriesPage = CategoriesListPage;
     public categoryNewsPage = CategoryNewsPage;
     public newsDetailsPage = NewsDetailsPage;
-    constructor() {}
+    public response;
+    constructor(private _http: Http, private _nav: NavController) { }
+
+    onPageLoaded() {
+        this.getCategories();
+    }
+
+    private getCategories() {
+        // https://api.parse.com/1/classes/Category
+        let requestHeaders = new Headers();
+        requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
+        requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
+
+        this._http.get('https://api.parse.com/1/classes/Category', {
+            headers: requestHeaders
+        }).map(res => res.json())
+            .subscribe(data => this.response = data.results,
+            error => console.log(error),
+            () => {
+                console.log("Success")
+            });
+    }
+
+    public showCategoryNews(name, objectId) {
+        this._nav.push(CategoryNewsPage, {
+            categoryName: name,
+            categoryObjectId: objectId
+        });
+    }
 }
