@@ -2,20 +2,18 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Lists</ion-title>
+  <ion-title>All News</ion-title>
 </ion-navbar>
 
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="#item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+<ion-content class="Category-news">
+    <ion-list>
+        <ion-item *ngFor="#news of cachedNews">
+            <ion-thumbnail item-left>
+                <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50" />
+            </ion-thumbnail>
+            <h2>{{news.newsTitle}}</h2>
+            <p>{{news.shortContent}}</p>
+            <button clear item-right (click)="goToDetails(news.objectId)">View</button>
+        </ion-item>
+    </ion-list>
 </ion-content>

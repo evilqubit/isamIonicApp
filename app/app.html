@@ -6,15 +6,15 @@
 
     <ion-content>
         <button menuClose ion-item *ngFor="#page of pages" (click)="openPage(page)">
-        {{page.title}}
-      </button>
+            {{page.title}}
+        </button>
         <ion-list>
             <ion-list-header>
                 CATEGORIES
             </ion-list-header>
             <button menuClose ion-item *ngFor="#categoriesPage of categoriesPages" (click)="openPage(categoriesPage)">
-        {{categoriesPage.title}}
-      </button>
+                {{categoriesPage.title}}
+            </button>
         </ion-list>
     </ion-content>
 

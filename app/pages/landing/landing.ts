@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController, Loading} from 'ionic-angular';
 import {Http, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
@@ -18,10 +18,16 @@ export class LandingPage {
     constructor(private _http: Http, private _nav: NavController) { }
 
     onPageLoaded() {
-        this.getCategories();
+        // this.getCategories();
     }
 
     private getCategories() {
+        let loading = Loading.create({
+          content: "Loading..."
+        })
+
+        this._nav.present(loading);
+
         // https://api.parse.com/1/classes/Category
         let requestHeaders = new Headers();
         requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
@@ -33,7 +39,8 @@ export class LandingPage {
             .subscribe(data => this.response = data.results,
             error => console.log(error),
             () => {
-                console.log("Success")
+                loading.dismiss();
+                console.log("Success");
             });
     }
 
