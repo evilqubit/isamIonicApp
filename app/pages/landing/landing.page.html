@@ -8,20 +8,23 @@
 </ion-navbar>
 
 
-<ion-content padding class="getting-started">
+<ion-content>
 
     <ion-searchbar></ion-searchbar>
     <ion-list *ngFor="#category of response" >
-        <ion-row *ngIf="category.subcat">
+        <ion-row>
             <ion-col width-100>
-                <ion-list-header (click)="showCategoryNews(category.categoryName, category.objectId)">
+                <ion-list-header class="Landing-categoryHeader" (click)="showCategoryNews(category.categoryName, category.objectId)">
                     {{category.categoryName}}
                 </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
+                <ion-slides class="Landing-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
                     <ion-slide *ngFor="#object of category.subcat; #i = index" class="Landing-categoryItemSlide" [navPush]="categoryNewsPage">
                         <h2>Subcategory {{i}}</h2>
                     </ion-slide>
                 </ion-slides>
+                <ion-item *ngIf="!category.subcat">
+                  No sub-categories available
+                </ion-item>
             </ion-col>
         </ion-row>
     </ion-list>

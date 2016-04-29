@@ -5,49 +5,53 @@ import 'rxjs/add/operator/map';
 import {NewsDetailsPage} from "../news-details/news-details";
 
 @Page({
-    templateUrl: "build/pages/category-news/category-news.page.html",
+  templateUrl: "build/pages/category-news/category-news.page.html",
 })
 
 export class CategoryNewsPage {
-    public categoryName: string;
-    public cachedNews: Object;
-    public categoryObjectId;
-    constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
-    }
+  public categoryName: string;
+  public cachedNews: Object;
+  public categoryObjectId;
+  constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
+  }
 
-    onPageLoaded() {
-        this.categoryName = this._params.get("categoryName")
-        this.categoryObjectId = this._params.get("categoryObjectId");
-        this.getCachedNews();
-    }
+  onPageLoaded() {
+    this.categoryName = this._params.get("categoryName")
+    this.categoryObjectId = this._params.get("categoryObjectId");
+    this.getCategoryNews();
+  }
 
-    public goToDetails(objectId: string) {
-        this._nav.push(NewsDetailsPage, {
-            objectId: objectId
-        });
-    }
+  public goToDetails(objectId: string) {
+    this._nav.push(NewsDetailsPage, {
+      objectId: objectId
+    });
+  }
 
-    private getCachedNews() {
-        let loading = Loading.create({
-            content: 'Please wait...'
-        });
+  private getSubCategories() {
 
-        this._nav.present(loading);
+  }
+
+  private getCategoryNews() {
+    let loading = Loading.create({
+      content: 'Please wait...'
+    });
+
+    this._nav.present(loading);
 
 
-        let headers = new Headers();
-        headers.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
-        headers.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
+    let headers = new Headers();
+    headers.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
+    headers.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
 
-        this._http.get(`https://api.parse.com/1/classes/News?where={"catId":{"__type": "Pointer","className": "Category","objectId": "${this.categoryObjectId}"}}`, {
-            headers: headers
-        }).map(res => res.json())
-            .subscribe(data => this.cachedNews = data.results,
-            (err) => console.log(err),
-            () => {
-                console.log(this.cachedNews);
-                console.log("Success");
-                loading.dismiss();
-            });
-    }
+    this._http.get(`https://api.parse.com/1/classes/News?where={"catId":{"__type": "Pointer","className": "Category","objectId": "${this.categoryObjectId}"}}`, {
+      headers: headers
+    }).map(res => res.json())
+      .subscribe(data => this.cachedNews = data.results,
+      (err) => console.log(err),
+      () => {
+        console.log(this.cachedNews);
+        console.log("Success");
+        loading.dismiss();
+      });
+  }
 }
