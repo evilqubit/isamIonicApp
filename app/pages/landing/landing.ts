@@ -52,10 +52,11 @@ export class LandingPage {
       });
   }
 
-  public showCategoryNews(name, objectId) {
+  public showCategoryNews(name, objectId, className) {
     this._nav.push(CategoryNewsPage, {
       categoryName: name,
-      categoryObjectId: objectId
+      categoryObjectId: objectId,
+      categoryClassName: className
     });
   }
 }

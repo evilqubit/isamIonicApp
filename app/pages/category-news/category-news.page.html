@@ -4,6 +4,9 @@
 
 <ion-content class="Category-news">
     <ion-list>
+      <ion-item *ngIf="cachedNews.length === 0">
+        There are no news in this category!
+      </ion-item>
         <ion-item text-wrap *ngFor="#news of cachedNews">
             <ion-thumbnail item-left>
                 <img [src]="news.newsThumb" />

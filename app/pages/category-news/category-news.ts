@@ -10,7 +10,8 @@ import {NewsDetailsPage} from "../news-details/news-details";
 
 export class CategoryNewsPage {
   public categoryName: string;
-  public cachedNews: Object;
+  public cachedNews = [];
+  public categoryClassName: string;
   public categoryObjectId;
   constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
   }
@@ -18,6 +19,7 @@ export class CategoryNewsPage {
   onPageLoaded() {
     this.categoryName = this._params.get("categoryName")
     this.categoryObjectId = this._params.get("categoryObjectId");
+    this.categoryClassName = this._params.get('categoryClassName');
     this.getCategoryNews();
   }
 
@@ -43,7 +45,7 @@ export class CategoryNewsPage {
     headers.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
     headers.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
 
-    this._http.get(`https://api.parse.com/1/classes/News?where={"catId":{"__type": "Pointer","className": "Category","objectId": "${this.categoryObjectId}"}}`, {
+    this._http.get(`https://api.parse.com/1/classes/News?where={"${this.categoryClassName==="Category" ? "catId" : "subCatId" }":{"__type": "Pointer","className": "${this.categoryClassName}","objectId": "${this.categoryObjectId}"}}`, {
       headers: headers
     }).map(res => res.json())
       .subscribe(data => this.cachedNews = data.results,
