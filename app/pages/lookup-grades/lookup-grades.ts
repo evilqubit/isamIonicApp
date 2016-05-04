@@ -13,6 +13,7 @@ import {Http, Headers} from 'angular2/http';
 export class LookupGradesPage {
   public studentNumber: string;
   public studentClass: string;
+  public studentGradeDetail;
 
   constructor(private _nav: NavController, private _http: Http) {
   }
@@ -30,7 +31,7 @@ export class LookupGradesPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        comsole.log("complete");
+        console.log("complete");
       });
   }
 }

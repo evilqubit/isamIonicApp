@@ -2,18 +2,26 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>All News</ion-title>
+  <ion-title>News</ion-title>
 </ion-navbar>
 
-<ion-content class="Category-news">
-    <ion-list>
-        <ion-item *ngFor="#news of cachedNews">
-            <ion-thumbnail item-left>
-                <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50" />
-            </ion-thumbnail>
-            <h2>{{news.newsTitle}}</h2>
-            <p>{{news.shortContent}}</p>
-            <button clear item-right (click)="goToDetails(news.objectId)">View</button>
-        </ion-item>
+<ion-content>
+    <ion-searchbar></ion-searchbar>
+    <ion-list *ngFor="#category of response" >
+        <ion-row>
+            <ion-col width-100>
+                <ion-list-header class="Landing-categoryHeader" (click)="showCategoryNews(category.categoryName, category.objectId, 'Category')">
+                    {{category.categoryName}}
+                </ion-list-header>
+                <ion-slides class="Landing-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
+                    <ion-slide *ngFor="#object of category.subcat; #i = index" class="Landing-categoryItemSlide" (click)="showCategoryNews('Subcategory', object.objectId, 'SubCategory')">
+                        <h2>Subcategory {{i}}</h2>
+                    </ion-slide>
+                </ion-slides>
+                <ion-item *ngIf="!category.subcat">
+                  No sub-categories available
+                </ion-item>
+            </ion-col>
+        </ion-row>
     </ion-list>
 </ion-content>

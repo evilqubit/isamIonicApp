@@ -7,266 +7,40 @@
     </ion-title>
 </ion-navbar>
 
-
 <ion-content>
+  <ion-row>
+    <ion-col class="Landing-tile" style="background-color: blue;">
+      News
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: red;">
+      Quizzes
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: yellow;">
+      Resources
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="Landing-tile" style="background-color: purple;">
+      Calendar
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: green;">
+      Grades
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: black;">
+      Batata
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="Landing-tile" style="background-color: brown;">
+      News
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: orange;">
+      News
+    </ion-col>
+    <ion-col class="Landing-tile" style="background-color: indigo;">
+      News
+    </ion-col>
+  </ion-row>
 
-    <ion-searchbar></ion-searchbar>
-    <ion-list *ngFor="#category of response" >
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header class="Landing-categoryHeader" (click)="showCategoryNews(category.categoryName, category.objectId, 'Category')">
-                    {{category.categoryName}}
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
-                    <ion-slide *ngFor="#object of category.subcat; #i = index" class="Landing-categoryItemSlide" (click)="showCategoryNews('Subcategory', object.objectId, 'SubCategory')">
-                        <h2>Subcategory {{i}}</h2>
-                    </ion-slide>
-                </ion-slides>
-                <ion-item *ngIf="!category.subcat">
-                  No sub-categories available
-                </ion-item>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <!--<ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    LATEST NEWS
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green" [navPush]="categoryNewsPage">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
 
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    NEWS
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green" [navPush]="newsDetailsPage">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    QUIZZES
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    Resources
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    MEDIA
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    UNIVERSITIES
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    SCHOOLS
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    CALENDAR
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    Latest News
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    News
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>
-    <ion-list>
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header [navPush]="categoryNewsPage">
-                    Quizzes
-                </ion-list-header>
-                <ion-slides class="Landing-categorySlider">
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-
-                    <ion-slide style="background-color: green">
-                        <h2>Slide 1</h2>
-                    </ion-slide>
-                </ion-slides>
-            </ion-col>
-        </ion-row>
-    </ion-list>-->
 </ion-content>
