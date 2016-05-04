@@ -6,6 +6,7 @@ import {StatusBar} from 'ionic-native';
 import {LandingPage} from './pages/landing/landing';
 import {CategoriesListPage} from './pages/categories-list/categories-list';
 import {CategoryNewsPage} from "./pages/category-news/category-news";
+import {LookupGradesPage} from "./pages/lookup-grades/lookup-grades";
 
 @App({
     templateUrl: 'build/app.html',
@@ -22,7 +23,8 @@ class MyApp {
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Home', component: LandingPage },
-            { title: 'All News', component: CategoriesListPage }
+            { title: 'All News', component: CategoriesListPage },
+            { title: 'Find Grades', component: LookupGradesPage }
         ];
 
         this.categoriesPages = [

@@ -1,0 +1,31 @@
+<!--
+  Generated template for the LookupGradesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-title>Lookup Grades</ion-title>
+</ion-navbar>
+
+<ion-content class="lookup-grades">
+  <ion-list>
+    <ion-item>
+      <ion-label>Class</ion-label>
+      <ion-select [(ngModel)]="studentClass">
+        <ion-option value="BR">BREVET</ion-option>
+        <ion-option value="SG">SG</ion-option>
+        <ion-option value="SV">SV</ion-option>
+        <ion-option value="ES">ES</ion-option>
+        <ion-option value="LH">LH</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="studentNumber" type="text" placeholder="Student Number"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <button round (click)="searchForGrades()">Search</button>
+
+</ion-content>
