@@ -1,19 +1,27 @@
 <ion-navbar *navbar>
-    <ion-title>{{categoryName}}</ion-title>
+  <ion-title>{{categoryName}}</ion-title>
 </ion-navbar>
 
 <ion-content class="Category-news">
-    <ion-list>
-      <ion-item *ngIf="cachedNews.length === 0">
-        There are no news in this category!
-      </ion-item>
-        <ion-item text-wrap *ngFor="#news of cachedNews">
-            <ion-thumbnail item-left>
-                <img [src]="news.newsThumb" />
-            </ion-thumbnail>
-            <h2>{{news.newsTitle}}</h2>
-            <p>{{news.shortContent}}</p>
-            <button clear item-right (click)="goToDetails(news.objectId)">View</button>
-        </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item *ngIf="cachedNews.length === 0">
+      There are no news in this category!
+    </ion-item>
+    <ion-item>
+      <ion-label>Filter</ion-label>
+      <ion-select [(ngModel)]="filter">
+        <ion-option *ngFor="#subsubcat of subsubcats" value="{{subsubcat.title}}">
+          {{ subsubcat.title }}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item text-wrap *ngFor="#news of cachedNews">
+      <ion-thumbnail item-left>
+        <img [src]="news.newsThumb" />
+      </ion-thumbnail>
+      <h2>{{news.newsTitle}}</h2>
+      <p>{{news.shortContent}}</p>
+      <button clear item-right (click)="goToDetails(news.objectId)">View</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

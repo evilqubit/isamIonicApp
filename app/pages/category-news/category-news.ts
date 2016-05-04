@@ -12,6 +12,7 @@ export class CategoryNewsPage {
   public categoryName: string;
   public cachedNews = [];
   public categoryClassName: string;
+  public subsubcats;
   public categoryObjectId;
   constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
   }
@@ -20,6 +21,21 @@ export class CategoryNewsPage {
     this.categoryName = this._params.get("categoryName")
     this.categoryObjectId = this._params.get("categoryObjectId");
     this.categoryClassName = this._params.get('categoryClassName');
+
+    this.subsubcats = [
+      {
+        title: "More Science",
+      },
+      {
+        title: "Nanotechnology",
+      },
+      {
+        title: "Computing",
+      },
+      {
+        title: "Arts and Sciences",
+      }
+    ]
     this.getCategoryNews();
   }
 
