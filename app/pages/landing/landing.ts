@@ -11,4 +11,9 @@ import {NewsDetailsPage} from "../news-details/news-details";
   templateUrl: 'build/pages/landing/landing.page.html'
 })
 export class LandingPage {
+  constructor(private _nav: NavController) { }
+
+  public goToNews() {
+    this._nav.push(CategoriesListPage);
+  }
 }
