@@ -10,12 +10,16 @@
     <ion-list *ngFor="#category of response" >
         <ion-row>
             <ion-col width-100>
-                <ion-list-header class="Landing-categoryHeader" (click)="showCategoryNews(category.categoryName, category.objectId, 'Category')">
+                <ion-list-header class="CategoryList-categoryHeader">
                     {{category.categoryName}}
                 </ion-list-header>
-                <ion-slides class="Landing-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
-                    <ion-slide *ngFor="#object of category.subcat; #i = index" class="Landing-categoryItemSlide" (click)="showCategoryNews('Subcategory', object.objectId, 'SubCategory')">
-                        <h2>Subcategory {{i}}</h2>
+                <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
+                    <ion-slide *ngFor="#subcategory of category.subcat"
+                    class="CategoryList-categoryItemSlide"
+                    (click)="showSubcategoryNews(subcategory)">
+                    <div *ngIf="subcategory !== null">
+                        <p>{{ subcategory.SubCatName }}</p>
+                    </div>
                     </ion-slide>
                 </ion-slides>
                 <ion-item *ngIf="!category.subcat">

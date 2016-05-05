@@ -51,11 +51,9 @@ export class CategoriesListPage {
       });
   }
 
-  public showCategoryNews(name, objectId, className) {
+  public showSubcategoryNews(subcategoryObject) {
     this._nav.push(CategoryNewsPage, {
-      categoryName: name,
-      categoryObjectId: objectId,
-      categoryClassName: className
+      categoryObject: subcategoryObject
     });
   }
 }

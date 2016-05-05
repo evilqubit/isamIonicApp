@@ -1,19 +1,20 @@
 <ion-navbar *navbar>
-  <ion-title>{{categoryName}}</ion-title>
+  <ion-title>{{categoryObject.SubCatName}}</ion-title>
 </ion-navbar>
 
 <ion-content class="Category-news">
   <ion-list>
-    <ion-item *ngIf="cachedNews.length === 0">
-      There are no news in this category!
-    </ion-item>
-    <ion-item>
+
+    <ion-item *ngIf="subsubcats">
       <ion-label>Filter</ion-label>
-      <ion-select [(ngModel)]="filter">
-        <ion-option *ngFor="#subsubcat of subsubcats" value="{{subsubcat.title}}">
-          {{ subsubcat.title }}
+      <ion-select [(ngModel)]="newsFilter" (change)="filterNews()">
+        <ion-option *ngFor="#subsubcat of subsubcats" value="{{subsubcat.objectId}}">
+          {{ subsubcat.SubSubName }}
         </ion-option>
       </ion-select>
+    </ion-item>
+    <ion-item *ngIf="cachedNews.length === 0">
+      There are no news in this category!
     </ion-item>
     <ion-item text-wrap *ngFor="#news of cachedNews">
       <ion-thumbnail item-left>
@@ -21,7 +22,7 @@
       </ion-thumbnail>
       <h2>{{news.newsTitle}}</h2>
       <p>{{news.shortContent}}</p>
-      <button clear item-right (click)="goToDetails(news.objectId)">View</button>
+      <button clear item-right (click)="goToDetails(news)">View</button>
     </ion-item>
   </ion-list>
 </ion-content>
