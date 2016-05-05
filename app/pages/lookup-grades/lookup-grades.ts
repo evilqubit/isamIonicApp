@@ -16,6 +16,7 @@ export class LookupGradesPage {
   public studentGradeDetail;
 
   constructor(private _nav: NavController, private _http: Http) {
+
   }
 
   public searchForGrades() {

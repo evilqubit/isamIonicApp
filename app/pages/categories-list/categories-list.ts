@@ -40,7 +40,7 @@ export class CategoriesListPage {
     requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
     requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
 
-    this._http.get('https://api.parse.com/1/classes/Category', {
+    this._http.get(`https://api.parse.com/1/classes/Category?include=subcat,subcat.subsubcat`, {
       headers: requestHeaders
     }).map(res => res.json())
       .subscribe(data => this.response = data.results,
