@@ -13,19 +13,158 @@
     <ion-item>
       <ion-label>Class</ion-label>
       <ion-select [(ngModel)]="studentClass">
-        <ion-option value="BR">BREVET</ion-option>
-        <ion-option value="SG">SG</ion-option>
-        <ion-option value="SV">SV</ion-option>
-        <ion-option value="ES">ES</ion-option>
-        <ion-option value="LH">LH</ion-option>
+        <ion-option value="br">BREVET</ion-option>
+        <ion-option value="sg">SG</ion-option>
+        <ion-option value="sv">SV</ion-option>
+        <ion-option value="es">ES</ion-option>
+        <ion-option value="lh">LH</ion-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-input [(ngModel)]="studentNumber" type="text" placeholder="Student Number"></ion-input>
+      <ion-input [(ngModel)]="studentNumber" type="number" placeholder="Student Number"></ion-input>
     </ion-item>
+
+    <ion-row>
+      <button round (click)="searchForGrades()">Search</button>
+    </ion-row>
+
   </ion-list>
 
-  <button round (click)="searchForGrades()">Search</button>
+  <div *ngIf="studentGradeDetail">
+    <hr/>
+    <ion-row>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.name}}
+      </ion-col>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.schoolName}}
+      </ion-col>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.roundNumber}}
+      </ion-col>
+    </ion-row>
 
+    <hr/>
+
+    <ion-row>
+      <ion-col>
+        Course
+      </ion-col>
+      <ion-col>
+        Course Grade
+      </ion-col>
+    </ion-row>
+
+    <hr/>
+    <ion-row>
+      <ion-col>
+        Arabic
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.arabic}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Chemistry
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.chemistry}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Civics
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.civics}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Foreign Language
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.foreign_language}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Geography
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.geography}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        History
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.history}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Math
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.math}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        Philosophy
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.philosophy}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        physics
+      </ion-col>
+      <ion-col>
+        {{studentGradeDetail.physics}}
+      </ion-col>
+    </ion-row>
+
+    <hr/>
+    <ion-row>
+      <ion-col class="LookupGrades-boldText">
+        Average
+      </ion-col>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.average}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="LookupGrades-boldText">
+        Mention
+      </ion-col>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.mention}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="LookupGrades-boldText">
+        Result
+      </ion-col>
+      <ion-col class="LookupGrades-boldText">
+        {{studentGradeDetail.result}}
+      </ion-col>
+    </ion-row>
+
+  </div>
 </ion-content>
