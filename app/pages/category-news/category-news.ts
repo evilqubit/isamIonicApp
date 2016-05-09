@@ -1,8 +1,9 @@
 import {Page, NavController, NavParams, Loading} from "ionic-angular";
 import {Http, Headers} from 'angular2/http';
-import {TruncatePipe} from "../../pipes/truncate";
 import 'rxjs/add/operator/map';
 
+//Custom Imports
+import {TruncatePipe} from "../../pipes/truncate";
 import {NewsDetailsPage} from "../news-details/news-details";
 
 @Page({
