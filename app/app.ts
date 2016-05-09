@@ -13,7 +13,7 @@ import {LookupGradesPage} from "./pages/lookup-grades/lookup-grades";
     config: {} // http://ionicframework.com/docs/v2/api/config/Config/
 })
 class MyApp {
-    public rootPage: any = LandingPage;
+    public rootPage: any = CategoriesListPage;
     public pages: Array<{ title: string, component: any }>;
     public categoriesPages: Array<{ title: string, component: any, categoryId: string }>;
 
@@ -27,11 +27,11 @@ class MyApp {
             { title: 'Find Grades', component: LookupGradesPage }
         ];
 
-        this.categoriesPages = [
-            { title: 'Universities', component: CategoryNewsPage, categoryId: "C95NB1grX0" },
-            { title: 'News', component: CategoryNewsPage, categoryId: "iXO8tgptpL" },
-            { title: 'Science', component: CategoryNewsPage, categoryId: "KT5uqdDFQL" }
-        ];
+        // this.categoriesPages = [
+        //     { title: 'Universities', component: CategoryNewsPage, categoryId: "C95NB1grX0" },
+        //     { title: 'News', component: CategoryNewsPage, categoryId: "iXO8tgptpL" },
+        //     { title: 'Science', component: CategoryNewsPage, categoryId: "KT5uqdDFQL" }
+        // ];
 
     }
 

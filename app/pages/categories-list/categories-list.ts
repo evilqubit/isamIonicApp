@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 //Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
 import {NewsDetailsPage} from "../news-details/news-details";
+import {LookupGradesPage} from "../lookup-grades/lookup-grades";
 
 @Page({
   templateUrl: 'build/pages/categories-list/categories-list.page.html'
@@ -15,6 +16,7 @@ export class CategoriesListPage {
   public newsDetailsPage = NewsDetailsPage;
   public response;
   public sliderOptions: Object;
+  public gradePage = LookupGradesPage;
 
   constructor(private _http: Http, private _nav: NavController) {
     this.sliderOptions = {
@@ -43,7 +45,18 @@ export class CategoriesListPage {
     this._http.get(`https://api.parse.com/1/classes/Category?include=subcat,subcat.subsubcat`, {
       headers: requestHeaders
     }).map(res => res.json())
-      .subscribe(data => this.response = data.results,
+      .subscribe((data) => {
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].subcat) {
+            for (let j = 0; j < data.results[i].subcat.length; j++) {
+              if (data.results[i].subcat[j] === null) {
+                data.results[i].subcat.splice(j, 1);
+              }
+            }
+          }
+        }
+        this.response = data.results;
+      },
       error => console.log(error),
       () => {
         loading.dismiss();

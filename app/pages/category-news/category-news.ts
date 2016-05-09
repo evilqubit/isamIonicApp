@@ -1,11 +1,13 @@
 import {Page, NavController, NavParams, Loading} from "ionic-angular";
 import {Http, Headers} from 'angular2/http';
+import {TruncatePipe} from "../../pipes/truncate";
 import 'rxjs/add/operator/map';
 
 import {NewsDetailsPage} from "../news-details/news-details";
 
 @Page({
   templateUrl: "build/pages/category-news/category-news.page.html",
+  pipes: [TruncatePipe]
 })
 
 export class CategoryNewsPage {
@@ -14,6 +16,7 @@ export class CategoryNewsPage {
   public newsFilter: string;
   public cachedNews = [];
   constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
+    this.newsFilter = "All";
   }
 
   onPageLoaded() {
@@ -54,6 +57,12 @@ export class CategoryNewsPage {
   }
 
   public filterNews() {
+
+    if (this.newsFilter === "All") {
+      this.getCategoryNews();
+      return true;
+    }
+
      let loading = Loading.create({
       content: 'Please wait...'
     });

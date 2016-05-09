@@ -1,31 +1,48 @@
 <ion-navbar *navbar>
   <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>News</ion-title>
+        <ion-icon name="menu" gray></ion-icon>
+    </button>
+  <ion-title>
+    <img src="build/assets/isam_logo.png" />
+  </ion-title>
 </ion-navbar>
 
 <ion-content>
-    <ion-searchbar></ion-searchbar>
-    <ion-list *ngFor="#category of response" >
-        <ion-row>
-            <ion-col width-100>
-                <ion-list-header class="CategoryList-categoryHeader">
-                    {{category.categoryName}}
-                </ion-list-header>
-                <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
-                    <ion-slide *ngFor="#subcategory of category.subcat"
-                    class="CategoryList-categoryItemSlide"
-                    (click)="showSubcategoryNews(subcategory)">
-                    <div *ngIf="subcategory !== null">
-                        <p>{{ subcategory.SubCatName }}</p>
-                    </div>
-                    </ion-slide>
-                </ion-slides>
-                <ion-item *ngIf="!category.subcat">
-                  No sub-categories available
-                </ion-item>
-            </ion-col>
-        </ion-row>
+  <ion-row>
+    <ion-col>
+      <img src="build/assets/ad_image.png" />
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-list>
+    <ion-list-header class="CategoryList-categoryHeader">
+          OFFICIAL RESULTS
+    </ion-list-header>
+    <ion-col class="CategoryList-gradeLookupButton" [navPush]="gradePage">
+      <img src="build/assets/exam_search_icon.png" />
+      Lookup your grade!
+    </ion-col>
     </ion-list>
+  </ion-row>
+
+  <ion-list *ngFor="#category of response">
+    <ion-row>
+      <ion-col width-100>
+        <ion-list-header class="CategoryList-categoryHeader">
+          {{category.categoryName}}
+        </ion-list-header>
+        <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
+          <ion-slide *ngFor="#subcategory of category.subcat" class="CategoryList-categoryItemSlide" (click)="showSubcategoryNews(subcategory)"
+            [ngStyle]="{'background-color': subcategory.SubCatColor}">
+            <img *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
+            <p *ngIf="!subcategory.SubCatIcon">{{ subcategory.SubCatName }}</p>
+          </ion-slide>
+        </ion-slides>
+        <ion-item *ngIf="!category.subcat">
+          No sub-categories available
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-list>
 </ion-content>

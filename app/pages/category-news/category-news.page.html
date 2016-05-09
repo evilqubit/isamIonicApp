@@ -8,6 +8,9 @@
     <ion-item *ngIf="subsubcats">
       <ion-label>Filter</ion-label>
       <ion-select [(ngModel)]="newsFilter" (change)="filterNews()">
+        <ion-option value="All">
+          All
+        </ion-option>
         <ion-option *ngFor="#subsubcat of subsubcats" value="{{subsubcat.objectId}}">
           {{ subsubcat.SubSubName }}
         </ion-option>
@@ -16,13 +19,13 @@
     <ion-item *ngIf="cachedNews.length === 0">
       There are no news in this category!
     </ion-item>
-    <ion-item text-wrap *ngFor="#news of cachedNews">
+    <ion-item text-wrap *ngFor="#news of cachedNews" tappable (click)="goToDetails(news)">
       <ion-thumbnail item-left>
-        <img [src]="news.newsThumb" />
+        <img [src]="news.newsImage" />
       </ion-thumbnail>
       <h2>{{news.newsTitle}}</h2>
-      <p>{{news.shortContent}}</p>
-      <button clear item-right (click)="goToDetails(news)">View</button>
+      <h3>{{news.authorName}}</h3>
+      <p>{{news.shortContent | truncate: 75: '...'}}</p>
     </ion-item>
   </ion-list>
 </ion-content>
