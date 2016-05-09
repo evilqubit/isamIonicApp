@@ -34,6 +34,9 @@ class MyApp {
     //     { title: 'Science', component: CategoryNewsPage, categoryId: "KT5uqdDFQL" }
     // ];
 
+    var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
+    var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
+
   }
 
   initializeApp() {
@@ -41,6 +44,17 @@ class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+
+      window.parsepushnotification.setUp(applicationId, clientKey);
+
+      //registerAsPushNotificationClient callback (called after setUp)
+      window.parsepushnotification.onRegisterAsPushNotificationClientSucceeded = function () {
+        alert('onRegisterAsPushNotificationClientSucceeded');
+      };
+      window.parsepushnotification.onRegisterAsPushNotificationClientFailed = function () {
+        alert('onRegisterAsPushNotificationClientFailed');
+      };
+
     });
   }
 
