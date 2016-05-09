@@ -1,16 +1,26 @@
 <ion-navbar *navbar>
-    <ion-title>NEWS DETAILS</ion-title>
+  <ion-title>Details</ion-title>
 </ion-navbar>
 
 <ion-content class="News-details">
-    <ion-card>
-        <img [src]="newsDetails.newsImage" />
-        <ion-card-content>
-            <ion-card-title>
-                {{newsDetails.newsTitle}}
-            </ion-card-title>
-            <div [innerHTML]="newsDetails.longContent">
-            </div>
-        </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <img [src]="newsDetails.newsImage" />
+    <ion-card-content>
+      <ion-card-title>
+        {{newsDetails.newsTitle}}
+      </ion-card-title>
+      <div *ngFor="#content of newsDetails.parsedLongContent" [innerHTML]="content.content">
+      </div>
+    </ion-card-content>
+
+    <ion-item>
+      Youtube Links {{newsDetails.youtubeLinks}}
+    </ion-item>
+    <ion-item>
+      Related Links {{newsDetails.relatedLinks}}
+    </ion-item>
+    <ion-item>
+      Additional Resources {{newsDetails.iframeLinks}}
+    </ion-item>
+  </ion-card>
 </ion-content>

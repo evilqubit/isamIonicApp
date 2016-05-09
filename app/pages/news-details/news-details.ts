@@ -2,24 +2,53 @@ import {Page, NavController, NavParams, Loading} from "ionic-angular";
 import {Http, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
+//Custom imports
+
+import {InAppBrowser} from 'ionic-native';
+
 @Page({
   templateUrl: "build/pages/news-details/news-details.page.html",
 })
 export class NewsDetailsPage {
   public newsDetails = {
-    newsTitle: '',
-    longContent: ''
+    newsTitle: ''
   };
   private objectId: string;
 
-  constructor(private _http: Http, private _nav: NavController, private _navParams: NavParams) {
+  constructor(
+    private _http: Http,
+    private _nav: NavController,
+    private _navParams: NavParams
+  ) {
 
   }
 
   onPageLoaded() {
     this.newsDetails = this._navParams.get("newsObject");
-    this.newsDetails.longContent = JSON.parse(this.newsDetails.longContent)[1].text;
+    this.newsDetails.parsedLongContent = this.parseLongContent(this.newsDetails.longContent);
     // this.getNewsDetails();
+  }
+
+  public openUrl() {
+    // InAppBrowser.open(url, target, options);
+  }
+
+  private parseLongContent(longContent) {
+    let newsLongContent: Array<{ content: string }> = [];
+    let jsonContent = JSON.parse(longContent);
+
+    for (var index = 0; index < jsonContent.length; index++) {
+      if (jsonContent[index].text) {
+        newsLongContent.push({
+          content: jsonContent[index].text
+        });
+      } else if(jsonContent[index].image){
+        newsLongContent.push({
+          content: `<img src=${jsonContent[index].image} />`
+        });
+      }
+    }
+    return newsLongContent;
   }
 
   // private getNewsDetails() {
