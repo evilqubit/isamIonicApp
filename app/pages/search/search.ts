@@ -24,6 +24,10 @@ export class SearchPage {
 
   public search(event) {
 
+    if (this.searchContent === '') {
+      return false;
+    }
+
     let loader = Loading.create({
       content: "Searching",
     });
@@ -48,8 +52,7 @@ export class SearchPage {
       () => {
         loader.dismiss();
         console.log("done");
-      })
-
+      });
   }
 
   public goToDetails(newsObject) {
