@@ -5,14 +5,26 @@
 .CategoryList-categoryItemSlide{
     margin: 0px 1px 0px 1px !important;
     background-color: gray;
+    align-items: flex-end;
 }
 
 .CategoryList-categoryHeader{
   white-space: normal;
+  font-size: 1.4rem;
+  font-weight: 400;
 }
 
 .CategoryList-gradeLookupButton{
   background-color: #1B75BB;
   text-align: center;
   color: white;
+}
+
+.CategoryList-categoryItemSlideText{
+  color: white;
+  font-size: 14px;
+}
+
+.CategoryList-list{
+  margin: 0px 0 10px 0 !important;
 }

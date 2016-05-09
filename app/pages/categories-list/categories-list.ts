@@ -20,9 +20,9 @@ export class CategoriesListPage {
 
   constructor(private _http: Http, private _nav: NavController) {
     this.sliderOptions = {
-      slidesPerView: 3,
+      slidesPerView: 2,
       freeMode: true, //	boolean	false	If true then slides will not have fixed positions
-      freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
+      // freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
     }
   }
 

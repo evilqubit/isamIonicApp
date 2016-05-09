@@ -1,6 +1,6 @@
 <ion-navbar *navbar>
   <button menuToggle>
-        <ion-icon name="menu" gray></ion-icon>
+        <ion-icon name="menu"></ion-icon>
     </button>
   <ion-title>
     <img src="build/assets/isam_logo.png" />
@@ -16,17 +16,16 @@
 
   <ion-row>
     <ion-list>
-    <ion-list-header class="CategoryList-categoryHeader">
-          OFFICIAL RESULTS
-    </ion-list-header>
-    <ion-col class="CategoryList-gradeLookupButton" [navPush]="gradePage">
-      <img src="build/assets/exam_search_icon.png" />
-      Lookup your grade!
-    </ion-col>
+      <ion-list-header class="CategoryList-categoryHeader">
+        OFFICIAL RESULTS
+      </ion-list-header>
+      <ion-col class="CategoryList-gradeLookupButton" [navPush]="gradePage">
+        <img src="build/assets/exam_search_icon.png" /> Lookup your grade!
+      </ion-col>
     </ion-list>
   </ion-row>
 
-  <ion-list *ngFor="#category of response">
+  <ion-list *ngFor="#category of response" class="CategoryList-list">
     <ion-row>
       <ion-col width-100>
         <ion-list-header class="CategoryList-categoryHeader">
@@ -36,7 +35,9 @@
           <ion-slide *ngFor="#subcategory of category.subcat" class="CategoryList-categoryItemSlide" (click)="showSubcategoryNews(subcategory)"
             [ngStyle]="{'background-color': subcategory.SubCatColor}">
             <img *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
-            <p *ngIf="!subcategory.SubCatIcon">{{ subcategory.SubCatName }}</p>
+            <p class="CategoryList-categoryItemSlideText" *ngIf="!subcategory.SubCatIcon">
+              {{ subcategory.SubCatName }}
+            </p>
           </ion-slide>
         </ion-slides>
         <ion-item *ngIf="!category.subcat">
