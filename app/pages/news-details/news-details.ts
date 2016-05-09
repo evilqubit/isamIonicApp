@@ -26,11 +26,19 @@ export class NewsDetailsPage {
   onPageLoaded() {
     this.newsDetails = this._navParams.get("newsObject");
     this.newsDetails.parsedLongContent = this.parseLongContent(this.newsDetails.longContent);
+    this.newsDetails.youtubeLinks = JSON.parse(this.newsDetails.youtubeLinks);
+    this.newsDetails.relatedLinks = JSON.parse(this.newsDetails.relatedLinks);
+    this.newsDetails.iframeLinks = JSON.parse(this.newsDetails.iframeLinks);
     // this.getNewsDetails();
   }
 
   public openUrl() {
     // InAppBrowser.open(url, target, options);
+  }
+
+  public openLinkInSystem(url) {
+    window.open(url, '_system');
+
   }
 
   private parseLongContent(longContent) {
@@ -42,7 +50,7 @@ export class NewsDetailsPage {
         newsLongContent.push({
           content: jsonContent[index].text
         });
-      } else if(jsonContent[index].image){
+      } else if (jsonContent[index].image) {
         newsLongContent.push({
           content: `<img src=${jsonContent[index].image} />`
         });
