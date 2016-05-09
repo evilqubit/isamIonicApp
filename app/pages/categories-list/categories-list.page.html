@@ -29,13 +29,14 @@
     <ion-row>
       <ion-col width-100>
         <ion-list-header class="CategoryList-categoryHeader">
-          {{category.categoryName}}
+          {{category.categoryName | uppercase}}
         </ion-list-header>
         <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
-          <ion-slide *ngFor="#subcategory of category.subcat" class="CategoryList-categoryItemSlide" (click)="showSubcategoryNews(subcategory)"
-            [ngStyle]="{'background-color': subcategory.SubCatColor}">
-            <img *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
-            <p class="CategoryList-categoryItemSlideText" *ngIf="!subcategory.SubCatIcon">
+          <ion-slide *ngFor="#subcategory of category.subcat" class="CategoryList-categoryItemSlide" (click)="showSubcategoryNews(subcategory)">
+            <div [ngStyle]="{'background': subcategory.SubCatColor}">
+              <img class="CategoryList-categoryIcon" *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
+            </div>
+            <p class="CategoryList-categoryItemSlideText">
               {{ subcategory.SubCatName }}
             </p>
           </ion-slide>

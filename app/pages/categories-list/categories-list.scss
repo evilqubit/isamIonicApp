@@ -1,11 +1,9 @@
 .CategoryList-categorySlider{
-    height: 200px !important;
 }
 
 .CategoryList-categoryItemSlide{
     margin: 0px 1px 0px 1px !important;
-    background-color: gray;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .CategoryList-categoryHeader{
@@ -21,10 +19,15 @@
 }
 
 .CategoryList-categoryItemSlideText{
-  color: white;
+  color: black;
   font-size: 14px;
 }
 
 .CategoryList-list{
   margin: 0px 0 10px 0 !important;
+}
+
+.CategoryList-categoryIcon{
+  // width: 125px !important;
+  // height: 125px !important;
 }
