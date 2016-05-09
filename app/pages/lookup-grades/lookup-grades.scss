@@ -1,3 +1,23 @@
 .LookupGrades-boldText{
   font-weight: bold;
 }
+
+.LookupGrades-results{
+  direction: rtl;
+  text-align: center;
+}
+
+.LookupGrades-grandTotal{
+  font-weight: bold;
+  color: red;
+}
+
+.LookupGrades-disclaimer{
+  font-style: italic;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.LookupGrades-submitButton{
+  justify-content: center;
+}

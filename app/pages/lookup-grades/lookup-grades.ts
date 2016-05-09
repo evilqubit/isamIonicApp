@@ -20,6 +20,10 @@ export class LookupGradesPage {
   }
 
   public searchForGrades() {
+    if (!this.validate()) {
+      return false;
+    }
+
     let loading = Loading.create({
       content: "Fetching..."
     })
@@ -34,6 +38,11 @@ export class LookupGradesPage {
         console.log(error);
       }, () => {
         console.log("complete");
+        if (this.studentGradeDetail === null) {
+          loading.dismiss();
+          window.alert("Student not found!");
+          return false;
+        }
         this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
       });
   }
@@ -51,5 +60,13 @@ export class LookupGradesPage {
         loader.dismiss();
         console.log("complete");
       });
+  }
+
+  private validate() {
+    if (!this.studentClass || !this.studentNumber) {
+      window.alert("Please fill all fields!");
+      return false;
+    }
+    return true;
   }
 }
