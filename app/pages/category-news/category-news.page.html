@@ -21,7 +21,7 @@
     </ion-item>
     <ion-item text-wrap *ngFor="#news of cachedNews" tappable (click)="goToDetails(news)">
       <ion-thumbnail item-left>
-        <img [src]="news.newsImage" />
+        <img [src]="news.newsThumb" />
       </ion-thumbnail>
       <h2>{{news.newsTitle}}</h2>
       <h3>{{news.authorName}}</h3>
