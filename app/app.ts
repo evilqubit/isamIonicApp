@@ -1,3 +1,5 @@
+declare var parsePlugin;
+
 import 'es6-shim';
 import {App, IonicApp, Platform} from 'ionic-angular';
 import {StatusBar, Push} from 'ionic-native';
@@ -31,21 +33,8 @@ class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
-      var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
-      // // Okay, so the platform is ready and our plugins are available.
-      // // Here you can do any higher level native things you might need.
+
       StatusBar.styleDefault();
-
-      // window.parsepushnotification.setUp(applicationId, clientKey);
-
-      // //registerAsPushNotificationClient callback (called after setUp)
-      // window.parsepushnotification.onRegisterAsPushNotificationClientSucceeded = function () {
-      //   alert('onRegisterAsPushNotificationClientSucceeded');
-      // };
-      // window.parsepushnotification.onRegisterAsPushNotificationClientFailed = function () {
-      //   alert('onRegisterAsPushNotificationClientFailed');
-      // };
 
       let push = Push.init({
         android: {
@@ -58,6 +47,9 @@ class MyApp {
         },
         windows: {}
       });
+
+      var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
+      var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
 
       push.on('registration', (data) => {
         console.log(data.registrationId);
@@ -73,34 +65,9 @@ class MyApp {
       });
 
       parsePlugin.initialize(applicationId, clientKey, function () {
-
-        parsePlugin.subscribe('SampleChannel', function () {
-
-          parsePlugin.getInstallationId(function (id) {
-
-            /**
-             * Now you can construct an object and save it to your own services, or Parse, and corrilate users to parse installations
-             *
-             var install_data = {
-                installation_id: id,
-                channels: ['SampleChannel']
-             }
-             *
-             */
-
-          }, function (e) {
-            alert('error');
-          });
-
-        }, function (e) {
-          alert('error');
-        });
-
       }, function (e) {
-        alert('error');
+        // alert('error');
       });
-
-
     });
   }
 

@@ -10,3 +10,4 @@ resources/ios/
 *.swp
 .DS_Store
 Thumbs.db
+bin/
