@@ -7,6 +7,7 @@ import {CategoryNewsPage} from "../category-news/category-news";
 import {NewsDetailsPage} from "../news-details/news-details";
 import {PartnerDetailsPage} from "../partner-details/partner-details";
 import {LookupGradesPage} from "../lookup-grades/lookup-grades";
+import { UserPreference } from '../../providers/user-preference/user-preference';
 
 @Page({
   templateUrl: 'build/pages/categories-list/categories-list.page.html'
@@ -21,7 +22,7 @@ export class CategoriesListPage {
   public partners;
   public gradePage = LookupGradesPage;
 
-  constructor(private _http: Http, private _nav: NavController) {
+  constructor(private _http: Http, private _nav: NavController, private _userPref: UserPreference) {
     this.sliderOptions = {
       slidesPerView: 3,
       freeMode: true, //	boolean	false	If true then slides will not have fixed positions
@@ -81,10 +82,10 @@ export class CategoriesListPage {
     let requestHeaders = new Headers();
     requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
     requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
-
+// where={"langId": ${this._userPref.getSelectedLanguage().id}}&
     this._http.get(`https://api.parse.com/1/classes/Category?include=subcat,subcat.subsubcat`, {
-      headers: requestHeaders
-    }).map(res => res.json())
+        headers: requestHeaders
+      }).map(res => res.json())
       .subscribe((data) => {
         for (let i = 0; i < data.results.length; i++) {
           if (data.results[i].subcat) {
