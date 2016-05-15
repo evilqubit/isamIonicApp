@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 //Custom Imports
 import {TruncatePipe} from "../../pipes/truncate";
 import {NewsDetailsPage} from "../news-details/news-details";
+import { UserPreference } from '../../providers/user-preference/user-preference';
 
 @Page({
   templateUrl: "build/pages/category-news/category-news.page.html",
@@ -16,7 +17,7 @@ export class CategoryNewsPage {
   public subsubcats: Array<Object>;
   public newsFilter: string;
   public cachedNews = [];
-  constructor(public _nav: NavController, private _http: Http, private _params: NavParams) {
+  constructor(public _nav: NavController, private _http: Http, private _params: NavParams, private _userPref: UserPreference ) {
     this.newsFilter = "All";
   }
 
@@ -45,7 +46,11 @@ export class CategoryNewsPage {
     headers.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
     headers.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
 
-    this._http.get(`https://api.parse.com/1/classes/News?where={"subCatId":{"__type": "Pointer","className": "${this.categoryObject.className}","objectId": "${this.categoryObject.objectId}"}}`, {
+    this._http.get(`https://api.parse.com/1/classes/News?where={
+      "subCatId":{
+        "__type": "Pointer","className": "${this.categoryObject.className}","objectId": "${this.categoryObject.objectId}"
+      },"langId": ${this._userPref.getSelectedLanguage().id}
+    }`, {
       headers: headers
     }).map(res => res.json())
       .subscribe(data => this.cachedNews = data.results,

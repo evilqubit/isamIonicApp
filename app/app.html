@@ -20,9 +20,6 @@
       </ion-col>
     </ion-row>-->
 
-    <ion-list-header>
-      Quick Links
-    </ion-list-header>
     <button menuClose ion-item *ngFor="#page of pages" (click)="openPage(page)">
             {{page.title}}
     </button>
@@ -34,7 +31,14 @@
                 {{categoriesPage.title}}
             </button>
     </ion-list>-->
+
   </ion-content>
+
+  <ion-toolbar position="bottom" menuClose (click)="presentLanguageSelectModal()">
+    <ion-title>
+      {{ userPref.selectedLanguage.name }}
+    </ion-title>
+  </ion-toolbar>
 
 </ion-menu>
 

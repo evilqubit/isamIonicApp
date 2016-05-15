@@ -10,7 +10,11 @@
 <ion-content>
   <ion-row>
     <ion-col>
-      <img src="build/assets/ad_image.png" />
+      <ion-slides class="CategoryList-adSlider" autoplay="7000">
+        <ion-slide *ngFor="#ad of adSlides" (click)="openLinkInSystem(ad.sliderUrl)">
+          <img [src]="ad.sliderImage" />
+        </ion-slide>
+      </ion-slides>
     </ion-col>
   </ion-row>
 
@@ -25,8 +29,8 @@
     </ion-list>
   </ion-row>
 
-  <ion-list *ngFor="#category of response" class="CategoryList-list">
-    <ion-row>
+  <ion-list>
+    <ion-row *ngFor="#category of response" class="CategoryList-list">
       <ion-col width-100>
         <ion-list-header class="CategoryList-categoryHeader">
           {{category.categoryName | uppercase}}
@@ -44,6 +48,23 @@
         <ion-item *ngIf="!category.subcat">
           No sub-categories available
         </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-100>
+        <ion-list-header class="CategoryList-categoryHeader">
+          PARTNERS
+        </ion-list-header>
+        <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions">
+          <ion-slide *ngFor="#partner of partners" class="CategoryList-categoryItemSlide" (click)="showPartnerDetails(partner)">
+            <div [ngStyle]="{'background': '#fff'}">
+              <img class="CategoryList-categoryIcon" [src]="partner.partnerImage" />
+            </div>
+            <p class="CategoryList-categoryItemSlideText">
+              {{ partner.partnerName }}
+            </p>
+          </ion-slide>
+        </ion-slides>
       </ion-col>
     </ion-row>
   </ion-list>

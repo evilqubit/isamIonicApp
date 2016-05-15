@@ -1,0 +1,37 @@
+<!--
+  Generated template for the LanguageSelectModalPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-buttons start>
+    <button (click)="dismiss(false)">
+    <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Select language</ion-title>
+  <ion-buttons end>
+    <button (click)="dismiss(true)">
+    <ion-icon name="checkmark-circle"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="language-select-modal">
+  <ion-list radio-group [(ngModel)]="languageId">
+    <ion-item>
+      <ion-label>English</ion-label>
+      <ion-radio value="1" ></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Francais</ion-label>
+      <ion-radio value="2" ></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>العربية</ion-label>
+      <ion-radio value="3" ></ion-radio>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

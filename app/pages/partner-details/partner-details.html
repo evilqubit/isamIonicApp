@@ -1,0 +1,20 @@
+<ion-navbar *navbar>
+  <ion-title>{{partnerDetails.partnerName}}</ion-title>
+</ion-navbar>
+
+<ion-content class="News-details">
+  <ion-card>
+    <img [src]="partnerDetails.partnerImage" />
+    <ion-card-content>
+      <ion-card-title>
+        {{partnerDetails.partnerName}}
+      </ion-card-title>
+      <div [innerHTML]="partnerDetails.partnerDescription">
+      </div>
+    </ion-card-content>
+
+    <button primary block *ngIf="partnerDetails.partnerUrl !== ''" (click)="openLinkInSystem(partnerDetails.partnerUrl)">
+      Visit Website
+     </button>
+  </ion-card>
+</ion-content>

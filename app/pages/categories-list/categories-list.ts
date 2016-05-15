@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 //Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
 import {NewsDetailsPage} from "../news-details/news-details";
+import {PartnerDetailsPage} from "../partner-details/partner-details";
 import {LookupGradesPage} from "../lookup-grades/lookup-grades";
 
 @Page({
@@ -14,13 +15,15 @@ export class CategoriesListPage {
   public categoriesPage = CategoriesListPage;
   public categoryNewsPage = CategoryNewsPage;
   public newsDetailsPage = NewsDetailsPage;
+  public adSlides;
   public response;
   public sliderOptions: Object;
+  public partners;
   public gradePage = LookupGradesPage;
 
   constructor(private _http: Http, private _nav: NavController) {
     this.sliderOptions = {
-      slidesPerView: 2,
+      slidesPerView: 3,
       freeMode: true, //	boolean	false	If true then slides will not have fixed positions
       // freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
     }
@@ -28,7 +31,44 @@ export class CategoriesListPage {
 
   onPageLoaded() {
     this.getCategories();
+    this.getSlideAds();
+    this.getPartners();
   }
+
+  public getPartners() {
+    let requestHeaders = new Headers();
+    requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
+    requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
+
+    this._http.get(`https://api.parse.com/1/classes/Partner`, {
+      headers: requestHeaders
+    }).map(res => res.json())
+      .subscribe((data) => {
+        this.partners = data.results;
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        console.log('done');
+      });
+  }
+
+  private getSlideAds() {
+    let requestHeaders = new Headers();
+    requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
+    requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
+
+    this._http.get(`https://api.parse.com/1/classes/Slider`, {
+      headers: requestHeaders
+    }).map(res => res.json())
+      .subscribe((data) => {
+        this.adSlides = data.results;
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        console.log('done');
+      });
+  }
+
 
   private getCategories() {
     let loading = Loading.create({
@@ -68,5 +108,15 @@ export class CategoriesListPage {
     this._nav.push(CategoryNewsPage, {
       categoryObject: subcategoryObject
     });
+  }
+
+  public showPartnerDetails(selectedPartner) {
+    this._nav.push(PartnerDetailsPage, {
+      partnerDetails: selectedPartner
+    });
+  }
+
+  public openLinkInSystem(url) {
+    window.open(url, '_system');
   }
 }

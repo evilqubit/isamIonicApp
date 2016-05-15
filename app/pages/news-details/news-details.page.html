@@ -13,14 +13,14 @@
       </div>
     </ion-card-content>
 
-    <ion-item (click)="openLinkInSystem()">
-      Youtube Links {{newsDetails.youtubeLinks}}
-    </ion-item>
-    <ion-item>
+    <button primary block *ngIf="newsDetails.mediaUrl !== ''" (click)="openLinkInSystem(newsDetails.mediaUrl)">
+      Watch Video
+     </button>
+    <!--<ion-item>
       Related Links {{newsDetails.relatedLinks}}
     </ion-item>
     <ion-item>
       Additional Resources {{newsDetails.iframeLinks}}
-    </ion-item>
+    </ion-item>-->
   </ion-card>
 </ion-content>

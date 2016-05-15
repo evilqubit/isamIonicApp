@@ -3,7 +3,6 @@ import {Http, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
 //Custom imports
-
 import {InAppBrowser} from 'ionic-native';
 
 @Page({
@@ -19,9 +18,7 @@ export class NewsDetailsPage {
     private _http: Http,
     private _nav: NavController,
     private _navParams: NavParams
-  ) {
-
-  }
+  ) { }
 
   onPageLoaded() {
     this.newsDetails = this._navParams.get("newsObject");
@@ -37,8 +34,8 @@ export class NewsDetailsPage {
   }
 
   public openLinkInSystem(url) {
+    // InAppBrowser.open(url, '_system');
     window.open(url, '_system');
-
   }
 
   private parseLongContent(longContent) {

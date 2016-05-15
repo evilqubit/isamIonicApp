@@ -1,7 +1,7 @@
 declare var parsePlugin;
 
 import 'es6-shim';
-import {App, IonicApp, Platform} from 'ionic-angular';
+import {App, IonicApp, Platform, Modal} from 'ionic-angular';
 import {StatusBar, Push} from 'ionic-native';
 
 //Custom Imports
@@ -10,17 +10,23 @@ import {CategoriesListPage} from './pages/categories-list/categories-list';
 import {CategoryNewsPage} from "./pages/category-news/category-news";
 import {LookupGradesPage} from "./pages/lookup-grades/lookup-grades";
 import {SearchPage} from './pages/search/search';
+import {UserPreference} from './providers/user-preference/user-preference';
+
+//Modals
+import {LanguageSelectModalPage} from './pages/language-select-modal/language-select-modal';
 
 @App({
   templateUrl: 'build/app.html',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/
+  providers: [UserPreference],
+  prodMode: true //TODO change to true before release
 })
 class MyApp {
   public rootPage: any = CategoriesListPage;
   public pages: Array<{ title: string, component: any }>;
   public categoriesPages: Array<{ title: string, component: any, categoryId: string }>;
 
-  constructor(private app: IonicApp, private platform: Platform) {
+  constructor(private app: IonicApp, private platform: Platform, public userPref: UserPreference) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -77,4 +83,11 @@ class MyApp {
     let nav = this.app.getComponent('nav');
     nav.setRoot(page.component);
   }
+
+  presentLanguageSelectModal() {
+    let nav = this.app.getComponent('nav');
+    let languageSelectModal = Modal.create(LanguageSelectModalPage);
+    nav.present(languageSelectModal);
+  }
+
 }
