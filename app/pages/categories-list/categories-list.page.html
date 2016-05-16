@@ -1,16 +1,23 @@
 <ion-navbar *navbar>
-  <button menuToggle>
+  <ion-buttons start>
+    <button menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button>
+  </ion-buttons>
   <ion-title>
     <img src="build/assets/isam_logo.png" />
   </ion-title>
+  <ion-buttons end>
+    <button [navPush]="searchPage">
+      <ion-icon name="search"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-content>
   <ion-row>
     <ion-col>
-      <ion-slides class="CategoryList-adSlider" autoplay="7000">
+      <ion-slides class="CategoryList-adSlider" [options]="adSlidesOptions">
         <ion-slide *ngFor="#ad of adSlides" (click)="openLinkInSystem(ad.sliderUrl)">
           <img [src]="ad.sliderImage" />
         </ion-slide>
