@@ -2,6 +2,7 @@ import {Page, NavController, ViewController} from 'ionic-angular';
 
 //Custom imports
 import { UserPreference } from '../../providers/user-preference/user-preference';
+import { CategoriesListPage } from '../categories-list/categories-list';
 
 /*
   Generated class for the LanguageSelectModalPage page.
@@ -15,7 +16,7 @@ import { UserPreference } from '../../providers/user-preference/user-preference'
 export class LanguageSelectModalPage {
   public selectedLanguage;
   public languageId;
-  constructor(public nav: NavController, private _userPref: UserPreference, private _viewCtrl: ViewController) {
+  constructor(private _nav: NavController, private _userPref: UserPreference, private _viewCtrl: ViewController) {
     this.selectedLanguage = this._userPref.getSelectedLanguage();
     console.log(this.selectedLanguage);
   }
@@ -26,5 +27,6 @@ export class LanguageSelectModalPage {
     }
 
     this._viewCtrl.dismiss();
+    this._nav.setRoot(CategoriesListPage);
   }
 }
