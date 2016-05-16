@@ -42,7 +42,7 @@ export class CategoriesListPage {
   }
 
   onPageLoaded() {
-    // this.getCategories();
+    this.getCategories();
     this.getSlideAds();
     this.getPartners();
   }
@@ -98,15 +98,15 @@ export class CategoriesListPage {
       headers: requestHeaders
     }).map(res => res.json())
       .subscribe((data) => {
-        // for (let i = 0; i < data.results.length; i++) {
-        //   if (data.results[i].subcat) {
-        //     for (let j = 0; j < data.results[i].subcat.length; j++) {
-        //       if (data.results[i].subcat[j] === null) {
-        //         data.results[i].subcat.splice(j, 1);
-        //       }
-        //     }
-        //   }
-        // }
+        for (let i = 0; i < data.results.length; i++) {
+          if (data.results[i].subcat) {
+            for (let j = 0; j < data.results[i].subcat.length; j++) {
+              if (data.results[i].subcat[j] === null) {
+                data.results[i].subcat.splice(j, 1);
+              }
+            }
+          }
+        }
         this.setNameByLanguage(data);
         this.response = data.results;
 
