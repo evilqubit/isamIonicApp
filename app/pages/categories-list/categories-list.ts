@@ -1,6 +1,5 @@
-import {Page, NavController, Loading} from 'ionic-angular';
+import {Page, NavController, Loading, Modal} from 'ionic-angular';
 import {Http, Headers} from 'angular2/http';
-import 'rxjs/add/operator/map';
 
 //Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
@@ -9,6 +8,9 @@ import {PartnerDetailsPage} from "../partner-details/partner-details";
 import {LookupGradesPage} from "../lookup-grades/lookup-grades";
 import { UserPreference } from '../../providers/user-preference/user-preference';
 import { SearchPage } from '../search/search';
+
+//Modals
+import {LanguageSelectModalPage} from '../language-select-modal/language-select-modal';
 
 @Page({
   templateUrl: 'build/pages/categories-list/categories-list.page.html'
@@ -148,5 +150,10 @@ export class CategoriesListPage {
         }
       }
     }
+  }
+
+  public presentLanguageSelectModal() {
+    let languageSelectModal = Modal.create(LanguageSelectModalPage);
+    this._nav.present(languageSelectModal);
   }
 }
