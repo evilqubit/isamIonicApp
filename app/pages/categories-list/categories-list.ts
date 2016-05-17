@@ -1,5 +1,6 @@
 import {Page, NavController, Loading, Modal} from 'ionic-angular';
 import {Http, Headers} from 'angular2/http';
+import { AdMob } from 'ionic-native';
 
 //Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
@@ -47,6 +48,8 @@ export class CategoriesListPage {
     this.getCategories();
     this.getSlideAds();
     this.getPartners();
+
+    // AdMob.showBanner(AdMob.AD_POSITION.TOP_CENTER);
   }
 
   public getPartners() {
