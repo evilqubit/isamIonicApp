@@ -24,9 +24,12 @@ export class LanguageSelectModalPage {
   dismiss(saveChanges) {
     if (saveChanges) {
       this._userPref.setLanguageById(this.languageId)
+      this._viewCtrl.dismiss();
+      this._nav.setRoot(CategoriesListPage);
+      return true;
     }
 
     this._viewCtrl.dismiss();
-    this._nav.setRoot(CategoriesListPage);
+
   }
 }
