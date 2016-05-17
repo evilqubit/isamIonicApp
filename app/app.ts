@@ -1,8 +1,8 @@
-declare var parsePlugin;
+declare var parsePlugin, AdMob;
 
 import 'es6-shim';
 import {App, IonicApp, Platform, Modal} from 'ionic-angular';
-import {StatusBar, Push} from 'ionic-native';
+import {StatusBar, Push, Splashscreen} from 'ionic-native';
 
 //Custom Imports
 import {LandingPage} from './pages/landing/landing';
@@ -40,41 +40,45 @@ class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
 
+      this.prepareAds();
+
       StatusBar.styleDefault();
 
-      let push = Push.init({
-        android: {
-          senderID: "12345679"
-        },
-        ios: {
-          alert: "true",
-          badge: true,
-          sound: 'false'
-        },
-        windows: {}
-      });
+      // let push = Push.init({
+      //   android: {
+      //     senderID: "12345679"
+      //   },
+      //   ios: {
+      //     alert: "true",
+      //     badge: true,
+      //     sound: 'false'
+      //   },
+      //   windows: {}
+      // });
 
-      var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
-      var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
+      // var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
+      // var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
 
-      push.on('registration', (data) => {
-        console.log(data.registrationId);
-      });
+      // push.on('registration', (data) => {
+      //   console.log(data.registrationId);
+      // });
 
-      push.on('notification', (data) => {
-        console.log(data.message);
-        console.log(data.title);
-        console.log(data.count);
-        console.log(data.sound);
-        console.log(data.image);
-        console.log(data.additionalData);
-      });
+      // push.on('notification', (data) => {
+      //   console.log(data.message);
+      //   console.log(data.title);
+      //   console.log(data.count);
+      //   console.log(data.sound);
+      //   console.log(data.image);
+      //   console.log(data.additionalData);
+      // });
 
-      parsePlugin.initialize(applicationId, clientKey, function () {
-      }, function (e) {
-        // alert('error');
-      });
+      // parsePlugin.initialize(applicationId, clientKey, function () {
+      // }, function (e) {
+      //   // alert('error');
+      // });
     });
+
+    Splashscreen.hide();
   }
 
   public openPage(page) {
@@ -88,6 +92,22 @@ class MyApp {
     let nav = this.app.getComponent('nav');
     let languageSelectModal = Modal.create(LanguageSelectModalPage);
     nav.present(languageSelectModal);
+  }
+
+  public prepareAds() {
+
+    let admobid = { // for Windows Phone
+      banner: '/53923969/ISAM',
+      // banner: 'ca-app-pub-6869992474017983/9375997553',
+      interstitial: '/53923969/ISAM-300'
+    };
+
+    AdMob.createBanner({
+      adId: admobid.banner,
+      position: AdMob.AD_POSITION.BOTTOM_CENTER,
+      isTesting: true, // TODO: remove this line when release
+      autoShow: true
+    })
   }
 
 }
