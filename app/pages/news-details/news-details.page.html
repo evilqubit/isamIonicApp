@@ -16,11 +16,11 @@
     <button primary block *ngIf="newsDetails.mediaUrl !== ''" (click)="openLinkInSystem(newsDetails.mediaUrl)">
       Watch Video
      </button>
-    <!--<ion-item>
-      Related Links {{newsDetails.relatedLinks}}
-    </ion-item>
-    <ion-item>
-      Additional Resources {{newsDetails.iframeLinks}}
-    </ion-item>-->
+
+    <div *ngIf="newsDetails.iframeLinks[0] !== ''">
+      <ion-item text-wrap *ngFor="#link of newsDetails.iframeLinks" (click)="openLinkInSystem(link)">
+        {{ link }}
+      </ion-item>
+    </div>
   </ion-card>
 </ion-content>
