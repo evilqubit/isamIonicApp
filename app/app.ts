@@ -4,7 +4,7 @@ import 'es6-shim';
 import {App, IonicApp, Platform, Modal} from 'ionic-angular';
 import {StatusBar, Push, Splashscreen} from 'ionic-native';
 
-//Custom Imports
+// Custom Imports
 import {LandingPage} from './pages/landing/landing';
 import {CategoriesListPage} from './pages/categories-list/categories-list';
 import {CategoryNewsPage} from "./pages/category-news/category-news";
@@ -12,7 +12,7 @@ import {LookupGradesPage} from "./pages/lookup-grades/lookup-grades";
 import {SearchPage} from './pages/search/search';
 import {UserPreference} from './providers/user-preference/user-preference';
 
-//Modals
+// Modals
 import {LanguageSelectModalPage} from './pages/language-select-modal/language-select-modal';
 
 @App({

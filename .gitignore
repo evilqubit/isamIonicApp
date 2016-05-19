@@ -11,3 +11,4 @@ resources/ios/
 .DS_Store
 Thumbs.db
 bin/
+npm-debug.*
