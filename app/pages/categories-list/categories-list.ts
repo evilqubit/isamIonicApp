@@ -34,17 +34,17 @@ export class CategoriesListPage {
   constructor(private _http: Http, private _nav: NavController, private _userPref: UserPreference) {
     this.sliderOptions = {
       slidesPerView: 3,
-      freeMode: true, //	boolean	false	If true then slides will not have fixed positions
+      freeMode: true, // boolean	false	If true then slides will not have fixed positions
       // freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
     }
 
     this.adSlidesOptions = {
-      autoplay: 10000,
+      autoplay: 4000,
       loop: false
     };
   }
 
-  onPageLoaded() {
+  public onPageLoaded() {
     this.getCategories();
     this.getSlideAds();
     this.getPartners();

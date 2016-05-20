@@ -43,8 +43,8 @@
         <ion-list-header class="CategoryList-categoryHeader">
           {{category.categoryName | uppercase}}
         </ion-list-header>
-        <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions" *ngIf="category.subcat">
-          <ion-slide *ngFor="#subcategory of category.subcat" (click)="showSubcategoryNews(subcategory)">
+        <ion-slides [options]="sliderOptions" *ngIf="category.subcat">
+          <ion-slide class="CategoryList-categorySlider" *ngFor="#subcategory of category.subcat" (click)="showSubcategoryNews(subcategory)">
             <div [ngStyle]="{'background': subcategory.SubCatColor}">
               <img class="CategoryList-categoryIcon" *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
             </div>

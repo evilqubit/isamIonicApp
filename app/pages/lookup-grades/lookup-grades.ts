@@ -62,6 +62,7 @@ export class LookupGradesPage {
     this._http.get(`https://mehe.firebaseio.com/scores/${this.studentClass}/${this.studentNumber}.json`)
       .map(res => res.json())
       .subscribe((data) => {
+        console.log(data, "From student detail");
         this.studentGradeDetail = data;
       }, (error) => {
         console.log(error);

@@ -21,7 +21,7 @@ export class CategoryNewsPage {
     this.newsFilter = "All";
   }
 
-  onPageLoaded() {
+  public onPageLoaded() {
     this.categoryObject = this._params.get("categoryObject");
     this.subsubcats = this.categoryObject.subsubcat;
 

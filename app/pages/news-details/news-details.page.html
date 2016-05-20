@@ -8,17 +8,21 @@
     <ion-card-content>
       <ion-card-title>
         {{newsDetails.newsTitle}}
+      <h4 class="NewsDetails-authorText">{{newsDetails.authorName}}</h4>
       </ion-card-title>
       <div *ngFor="#content of newsDetails.parsedLongContent" [innerHTML]="content.content">
       </div>
     </ion-card-content>
 
-    <button primary block *ngIf="newsDetails.mediaUrl !== ''" (click)="openLinkInSystem(newsDetails.mediaUrl)">
+    <button isam-red block *ngIf="newsDetails.mediaUrl !== ''" (click)="openLinkInSystem(newsDetails.mediaUrl)">
       Watch Video
      </button>
 
     <div *ngIf="newsDetails.iframeLinks[0] !== ''">
-      <ion-item text-wrap *ngFor="#link of newsDetails.iframeLinks" (click)="openLinkInSystem(link)">
+      <ion-list-header>
+        Links
+      </ion-list-header>
+      <ion-item class="NewsDetails-iframeLinks" text-wrap *ngFor="#link of newsDetails.iframeLinks" (click)="openLinkInSystem(link)">
         {{ link }}
       </ion-item>
     </div>
