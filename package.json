@@ -37,7 +37,9 @@
       "locator": "phonegap-plugin-push",
       "id": "phonegap-plugin-push"
     },
-    "cordova-plugin-admobpro"
+    "cordova-plugin-admobpro",
+    "cordova-plugin-device-orientation",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
     "ios",

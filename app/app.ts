@@ -2,24 +2,24 @@ declare var parsePlugin, AdMob;
 
 import 'es6-shim';
 import {App, IonicApp, Platform, Modal} from 'ionic-angular';
-import {StatusBar, Push, Splashscreen} from 'ionic-native';
+import {StatusBar, Splashscreen} from 'ionic-native';
 
 // Custom Imports
-import {LandingPage} from './pages/landing/landing';
 import {CategoriesListPage} from './pages/categories-list/categories-list';
-import {CategoryNewsPage} from "./pages/category-news/category-news";
 import {LookupGradesPage} from "./pages/lookup-grades/lookup-grades";
 import {SearchPage} from './pages/search/search';
 import {UserPreference} from './providers/user-preference/user-preference';
+import { QuizzesPage } from './pages/quizzes/quizzes';
+import { CalendarPage } from './pages/calendar/calendar';
 
 // Modals
 import {LanguageSelectModalPage} from './pages/language-select-modal/language-select-modal';
 
 @App({
   templateUrl: 'build/app.html',
-  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {},
   providers: [UserPreference],
-  prodMode: true //TODO change to true before release
+  prodMode: false // TODO change to true before release
 })
 class MyApp {
   public rootPage: any = CategoriesListPage;
@@ -33,11 +33,13 @@ class MyApp {
     this.pages = [
       { title: 'Search', component: SearchPage },
       { title: 'Home', component: CategoriesListPage },
-      { title: 'Find Grades', component: LookupGradesPage }
+      { title: 'Find Grades', component: LookupGradesPage },
+      { title: "Quizzes", component: QuizzesPage },
+      { title: "Calendar", component: CalendarPage }
     ];
   }
 
-  initializeApp() {
+  public initializeApp() {
     this.platform.ready().then(() => {
 
       this.prepareAds();

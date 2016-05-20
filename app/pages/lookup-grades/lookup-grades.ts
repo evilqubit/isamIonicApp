@@ -1,30 +1,25 @@
 import {Page, NavController, Loading} from 'ionic-angular';
 import {Http} from 'angular2/http';
+import {Geolocation} from 'ionic-native';
 
 declare var google;
 
-/*
-  Generated class for the LookupGradesPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/lookup-grades/lookup-grades.html'
 })
 export class LookupGradesPage {
   public studentNumber: string;
   public studentClass: string;
+  public currentCenterLocation : {
+    latitude: number,
+    longitude: number,
+    centerName: string
+  };
   // public loadCenterMap: boolean = false;
   public map;
-  public studentGradeDetail;
+  public studentGradeDetail = null;
 
-  constructor(private _nav: NavController, private _http: Http) {
-
-  }
-
-  public onPageLoaded() {
-  }
+  constructor(private _nav: NavController, private _http: Http) { }
 
   public searchForGrades() {
     if (!this.validate()) {
@@ -55,19 +50,17 @@ export class LookupGradesPage {
 
     let loading = Loading.create({
       content: "Fetching..."
-    })
+    });
 
     this._nav.present(loading);
 
     this._http.get(`https://mehe.firebaseio.com/scores/${this.studentClass}/${this.studentNumber}.json`)
       .map(res => res.json())
       .subscribe((data) => {
-        console.log(data, "From student detail");
         this.studentGradeDetail = data;
       }, (error) => {
         console.log(error);
       }, () => {
-        console.log("complete");
         if (this.studentGradeDetail === null) {
           loading.dismiss();
           window.alert("Student not found!");
@@ -77,18 +70,55 @@ export class LookupGradesPage {
       });
   }
 
+  public getDirections() {
+    let loader = Loading.create({
+      content: "Getting directions"
+    });
+    this._nav.present(loader);
+
+    let centerlatLng = new google.maps.LatLng(this.currentCenterLocation.latitude, this.currentCenterLocation.longitude);
+    let directions = {
+      origin: null,
+      destination: centerlatLng,
+      showList: false
+    };
+
+    Geolocation.getCurrentPosition().then((resp) => {
+      let userlatlng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      directions.origin = userlatlng;
+      let directionsDisplay = new google.maps.DirectionsRenderer();
+      let directionsService = new google.maps.DirectionsService();
+      // let geocoder = new google.maps.Geocoder();
+
+      let request = {
+        origin: directions.origin,
+        destination: directions.destination,
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
+      };
+
+      directionsService.route(request, (response, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisplay.setDirections(response);
+          directionsDisplay.setMap(this.map);
+          directionsDisplay.setPanel(document.getElementById('directionsList'));
+          directions.showList = true;
+          loader.dismiss();
+        } else {
+          alert('Google route unsuccesfull!');
+        }
+      });
+    });
+  }
 
   private getSchoolInfo(schoolId, loader) {
     this._http.get(`https://mehe.firebaseio.com/schools/${schoolId}.json`)
       .map(res => res.json())
       .subscribe((school) => {
         this.studentGradeDetail.schoolName = school.schoolName;
-        console.log(school);
       }, (error) => {
         console.log(error);
       }, () => {
         loader.dismiss();
-        console.log("complete");
       });
   }
 
@@ -101,11 +131,10 @@ export class LookupGradesPage {
   }
 
   private getCenterLocation(centerId: string) {
-    let location = null;
     this._http.get(`https://mehe.firebaseio.com/centers/${centerId}.json`)
       .map(res => res.json())
       .subscribe((centerInfo) => {
-        location = {
+        this.currentCenterLocation = {
           latitude: centerInfo.latitude,
           longitude: centerInfo.longitude,
           centerName: centerInfo.name
@@ -113,7 +142,7 @@ export class LookupGradesPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        this.loadMap(location.latitude, location.longitude, location.centerName);
+        this.loadMap(this.currentCenterLocation.latitude, this.currentCenterLocation.longitude, this.currentCenterLocation.centerName);
       });
   }
 
@@ -142,6 +171,5 @@ export class LookupGradesPage {
     marker.addListener('click', function () {
       infowindow.open(this.map, marker);
     });
-
   }
 }

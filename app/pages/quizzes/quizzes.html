@@ -1,0 +1,21 @@
+<!--
+  Generated template for the QuizzesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+  <ion-title>Quizzes</ion-title>
+</ion-navbar>
+
+<ion-content padding class="quizzes">
+  <ion-list>
+    <ion-item *ngFor="#quizz of quizzes" (click)="startQuiz(quizz)">
+      {{quizz.quizName}}
+      <p>{{quizz.schoolName}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
