@@ -17,7 +17,7 @@ export class PartnerDetailsPage {
 
   constructor(private _nav: NavController, private _navParams: NavParams) { }
 
-  onPageLoaded() {
+  public onPageLoaded() {
     this.partnerDetails = this._navParams.get("partnerDetails");
   }
 
