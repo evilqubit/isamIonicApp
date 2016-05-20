@@ -11,7 +11,7 @@
   <ion-title>Quizzes</ion-title>
 </ion-navbar>
 
-<ion-content padding class="quizzes">
+<ion-content class="quizzes">
   <ion-list>
     <ion-item *ngFor="#quizz of quizzes" (click)="startQuiz(quizz)">
       {{quizz.quizName}}

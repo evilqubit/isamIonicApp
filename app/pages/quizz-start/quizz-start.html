@@ -9,20 +9,46 @@
 </ion-navbar>
 
 <ion-content padding class="quizz-start">
-  <ion-slides #quizzSlider [option]="quizzSlidesOptions">
+  <ion-slides #quizzSlider [options]="quizzSlidesOptions">
     <ion-slide *ngFor="#quizzQuestion of quizz.quizQuestions">
       <ion-card>
+        <img *ngIf="quizzQuestion.questionPicture" [src]="quizzQuestion.questionPicture"/>
         <ion-card-header text-wrap class="QuizzStart-questionTitle">
           {{quizzQuestion.questionText}}
         </ion-card-header>
-        <ion-list radio-group>
+        <ion-list radio-group [(ngModel)]="quizzAnswer">
           <ion-item *ngFor="#choice of quizzQuestion.questionChoices">
-            <ion-label>{{choice.num}}</ion-label>
-            <ion-radio value="{{choice.choice}}"></ion-radio>
+            <ion-label>{{choice.choice}}</ion-label>
+            <ion-radio value="{{choice.num}}"></ion-radio>
           </ion-item>
-          <button primary full (click)="nextQuestion()">
-            Next Question
-          </button>
+          <ion-row>
+            <!--<ion-col width-50>
+              <button primary full (click)="prevQuestion()">
+              Previous Question
+              </button>
+            </ion-col>-->
+            <ion-col>
+              <button primary full (click)="nextQuestion()">
+                Next Question
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card>
+        <ion-list>
+          <ion-item>
+            You have reached the end of this quiz!
+          </ion-item>
+          <ion-row>
+            <ion-col>
+              <button primary full (click)="submitQuiz()">
+                Submit Quiz
+              </button>
+            </ion-col>
+          </ion-row>
         </ion-list>
       </ion-card>
     </ion-slide>
