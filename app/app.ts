@@ -11,6 +11,7 @@ import {SearchPage} from './pages/search/search';
 import {UserPreference} from './providers/user-preference/user-preference';
 import { QuizzesPage } from './pages/quizzes/quizzes';
 import { CalendarPage } from './pages/calendar/calendar';
+import { ResourcesPage } from './pages/resources/resources';
 
 // Modals
 import {LanguageSelectModalPage} from './pages/language-select-modal/language-select-modal';
@@ -33,9 +34,10 @@ class MyApp {
     this.pages = [
       { title: 'Search', component: SearchPage },
       { title: 'Home', component: CategoriesListPage },
-      { title: 'Find Grades', component: LookupGradesPage },
       { title: "Quizzes", component: QuizzesPage },
-      { title: "Calendar", component: CalendarPage }
+      { title: "Calendar", component: CalendarPage },
+      { title: 'Files & Resources', component: ResourcesPage },
+      { title: 'Find Grades', component: LookupGradesPage }
     ];
   }
 
