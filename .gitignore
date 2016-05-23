@@ -13,3 +13,4 @@ Thumbs.db
 bin/
 npm-debug.*
 .vscode/
+bin/*.apk
