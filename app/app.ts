@@ -1,7 +1,7 @@
 declare var parsePlugin, AdMob;
 
 import 'es6-shim';
-import {App, IonicApp, Platform, Modal} from 'ionic-angular';
+import {App, IonicApp, Platform, Modal, Page} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 
 // Custom Imports
@@ -23,9 +23,8 @@ import {LanguageSelectModalPage} from './pages/language-select-modal/language-se
   prodMode: false // TODO change to true before release
 })
 class MyApp {
-  public rootPage: any = CategoriesListPage;
+  public rootPage = CategoriesListPage;
   public pages: Array<{ title: string, component: any }>;
-  public categoriesPages: Array<{ title: string, component: any, categoryId: string }>;
 
   constructor(private app: IonicApp, private platform: Platform, public userPref: UserPreference) {
     this.initializeApp();
@@ -46,8 +45,9 @@ class MyApp {
 
       this.prepareAds();
 
+      // Plugins calling
       StatusBar.styleDefault();
-
+      Splashscreen.hide();
       // let push = Push.init({
       //   android: {
       //     senderID: "12345679"
@@ -80,9 +80,8 @@ class MyApp {
       // }, function (e) {
       //   // alert('error');
       // });
-    });
 
-    Splashscreen.hide();
+    });
   }
 
   public openPage(page) {
