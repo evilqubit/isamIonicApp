@@ -69,28 +69,31 @@ export class CategoriesListPage {
       });
   }
 
-  private getSlideAds() {
-    let requestHeaders = new Headers();
-    requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
-    requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
-
-    this._http.get(`https://api.parse.com/1/classes/Slider`, {
-      headers: requestHeaders
-    }).map(res => res.json())
-      .subscribe((data) => {
-        this.adSlides = data.results;
-      }, (error) => {
-        console.log(error);
-      }, () => {
-        console.log('done');
-      });
+  public showSubcategoryNews(subcategoryObject) {
+    this._nav.push(CategoryNewsPage, {
+      categoryObject: subcategoryObject
+    });
   }
 
+  public showPartnerDetails(selectedPartner) {
+    this._nav.push(PartnerDetailsPage, {
+      partnerDetails: selectedPartner
+    });
+  }
+
+  public openLinkInSystem(url) {
+    window.open(url, '_system');
+  }
+
+  public presentLanguageSelectModal() {
+    let languageSelectModal = Modal.create(LanguageSelectModalPage);
+    this._nav.present(languageSelectModal);
+  }
 
   private getCategories() {
     let loading = Loading.create({
       content: "Loading..."
-    })
+    });
 
     this._nav.present(loading);
 
@@ -123,20 +126,21 @@ export class CategoriesListPage {
       });
   }
 
-  public showSubcategoryNews(subcategoryObject) {
-    this._nav.push(CategoryNewsPage, {
-      categoryObject: subcategoryObject
-    });
-  }
+  private getSlideAds() {
+    let requestHeaders = new Headers();
+    requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
+    requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
 
-  public showPartnerDetails(selectedPartner) {
-    this._nav.push(PartnerDetailsPage, {
-      partnerDetails: selectedPartner
-    });
-  }
-
-  public openLinkInSystem(url) {
-    window.open(url, '_system');
+    this._http.get(`https://api.parse.com/1/classes/Slider`, {
+      headers: requestHeaders
+    }).map(res => res.json())
+      .subscribe((data) => {
+        this.adSlides = data.results;
+      }, (error) => {
+        console.log(error);
+      }, () => {
+        console.log('done');
+      });
   }
 
   private setNameByLanguage(categoryData) {
@@ -153,10 +157,5 @@ export class CategoriesListPage {
         }
       }
     }
-  }
-
-  public presentLanguageSelectModal() {
-    let languageSelectModal = Modal.create(LanguageSelectModalPage);
-    this._nav.present(languageSelectModal);
   }
 }
