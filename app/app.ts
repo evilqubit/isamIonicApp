@@ -33,9 +33,9 @@ class MyApp {
     this.pages = [
       { title: 'Search', component: SearchPage },
       { title: 'Home', component: CategoriesListPage },
-      { title: "Quizzes", component: QuizzesPage },
-      { title: "Calendar", component: CalendarPage },
-      { title: 'Files & Resources', component: ResourcesPage },
+      // { title: "Quizzes", component: QuizzesPage },
+      // { title: "Calendar", component: CalendarPage },
+      // { title: 'Files & Resources', component: ResourcesPage },
       { title: 'Find Grades', component: LookupGradesPage }
     ];
   }

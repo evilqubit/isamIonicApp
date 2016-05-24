@@ -29,7 +29,7 @@ export class LookupGradesPage {
       this.studentGradeDetail = null;
       let loader = Loading.create({
         content: "Loading map to Center",
-        duration: 20000
+        duration: 10000
       });
 
       this._nav.present(loader);
@@ -40,7 +40,7 @@ export class LookupGradesPage {
       this.studentGradeDetail = null;
       let loader = Loading.create({
         content: "Loading map to Center",
-        duration: 20000
+        duration: 12000
       });
       this._nav.present(loader);
 

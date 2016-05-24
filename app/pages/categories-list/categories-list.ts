@@ -1,8 +1,7 @@
 import {Page, NavController, Loading, Modal} from 'ionic-angular';
 import {Http, Headers} from 'angular2/http';
-import { AdMob } from 'ionic-native';
 
-//Custom imports
+// Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
 import {NewsDetailsPage} from "../news-details/news-details";
 import {PartnerDetailsPage} from "../partner-details/partner-details";
@@ -10,23 +9,23 @@ import {LookupGradesPage} from "../lookup-grades/lookup-grades";
 import { UserPreference } from '../../providers/user-preference/user-preference';
 import { SearchPage } from '../search/search';
 
-//Modals
+// Modals
 import {LanguageSelectModalPage} from '../language-select-modal/language-select-modal';
 
 @Page({
   templateUrl: 'build/pages/categories-list/categories-list.page.html'
 })
 export class CategoriesListPage {
-  //Pages used for navigation
+  // Pages used for navigation
   public categoriesPage = CategoriesListPage;
   public categoryNewsPage = CategoryNewsPage;
   public newsDetailsPage = NewsDetailsPage;
   public gradePage = LookupGradesPage;
   public searchPage = SearchPage;
-  //Sliders Options
+  // Sliders Options
   public sliderOptions: Object;
   public adSlidesOptions: Object;
-  //Sliders content
+  // Sliders content
   public adSlides;
   public response;
   public partners;
@@ -48,8 +47,6 @@ export class CategoriesListPage {
     this.getCategories();
     this.getSlideAds();
     this.getPartners();
-
-    // AdMob.showBanner(AdMob.AD_POSITION.TOP_CENTER);
   }
 
   public getPartners() {
@@ -111,12 +108,14 @@ export class CategoriesListPage {
             for (let j = 0; j < data.results[i].subcat.length; j++) {
               if (data.results[i].subcat[j] === null) {
                 data.results[i].subcat.splice(j, 1);
+                j = 0;
               }
             }
           }
         }
         this.setNameByLanguage(data);
         this.response = data.results;
+        console.log(data);
 
       },
       error => console.log(error),
