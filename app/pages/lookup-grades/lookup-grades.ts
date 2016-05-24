@@ -10,11 +10,12 @@ declare var google;
 export class LookupGradesPage {
   public studentNumber: string;
   public studentClass: string;
-  public currentCenterLocation : {
+  public currentCenterLocation: {
     latitude: number,
     longitude: number,
     centerName: string
   };
+  public chosenStudentNumber: string;
   // public loadCenterMap: boolean = false;
   public map;
   public studentGradeDetail = null;
@@ -61,12 +62,15 @@ export class LookupGradesPage {
       }, (error) => {
         console.log(error);
       }, () => {
+        this.chosenStudentNumber = this.studentNumber;
+        loading.dismiss();
         if (this.studentGradeDetail === null) {
-          loading.dismiss();
-          window.alert("Student not found!");
+          window.alert(`رقم المرشح ${this.studentNumber} غير موجود`);
           return false;
+        } else if (!this.studentGradeDetail.grand_total) {
+          window.alert(`النتائج لم تصدر بعد`);
+          this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
         }
-        this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
       });
   }
 
