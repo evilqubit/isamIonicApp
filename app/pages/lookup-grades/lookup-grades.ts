@@ -26,28 +26,28 @@ export class LookupGradesPage {
     if (!this.validate()) {
       return false;
     }
-    if (this.studentNumber === "1020") {
-      this.studentGradeDetail = null;
-      let loader = Loading.create({
-        content: "Loading map to Center",
-        duration: 10000
-      });
+    // if (this.studentNumber === "1020") {
+    //   this.studentGradeDetail = null;
+    //   let loader = Loading.create({
+    //     content: "Loading map to Center",
+    //     duration: 10000
+    //   });
 
-      this._nav.present(loader);
+    //   this._nav.present(loader);
 
-      this.getCenterLocation("SCH-1003");
-      return false;
-    } else if (this.studentNumber === "1000") {
-      this.studentGradeDetail = null;
-      let loader = Loading.create({
-        content: "Loading map to Center",
-        duration: 12000
-      });
-      this._nav.present(loader);
+    //   this.getCenterLocation("SCH-1003");
+    //   return false;
+    // } else if (this.studentNumber === "1000") {
+    //   this.studentGradeDetail = null;
+    //   let loader = Loading.create({
+    //     content: "Loading map to Center",
+    //     duration: 12000
+    //   });
+    //   this._nav.present(loader);
 
-      this.getCenterLocation("SCH-104");
-      return false;
-    }
+    //   this.getCenterLocation("SCH-104");
+    //   return false;
+    // }
 
     let loading = Loading.create({
       content: "Fetching..."
@@ -69,8 +69,11 @@ export class LookupGradesPage {
           return false;
         } else if (!this.studentGradeDetail.grand_total) {
           window.alert(`النتائج لم تصدر بعد`);
-          this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
+          this.getCenterLocation(this.studentGradeDetail.centerID);
+          this.studentGradeDetail = null;
+          return false;
         }
+        this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
       });
   }
 
@@ -135,6 +138,13 @@ export class LookupGradesPage {
   }
 
   private getCenterLocation(centerId: string) {
+    let loader = Loading.create({
+      content: "Loading map to Center",
+      duration: 10000
+    });
+
+    this._nav.present(loader);
+
     this._http.get(`https://mehe.firebaseio.com/centers/${centerId}.json`)
       .map(res => res.json())
       .subscribe((centerInfo) => {
