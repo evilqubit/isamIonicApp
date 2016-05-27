@@ -41,8 +41,8 @@
     "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ],
   "name": "isam",
   "description": "ISAM: An Ionic project"

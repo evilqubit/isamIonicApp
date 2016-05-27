@@ -20,7 +20,7 @@ import {LanguageSelectModalPage} from './pages/language-select-modal/language-se
   templateUrl: 'build/app.html',
   config: {},
   providers: [UserPreference],
-  prodMode: false // TODO change to true before release
+  prodMode: true // TODO change to true before release
 })
 class MyApp {
   public rootPage = CategoriesListPage;
