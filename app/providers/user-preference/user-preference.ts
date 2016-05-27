@@ -25,31 +25,31 @@ export class UserPreference {
     });
   }
 
-  setLanguageById(languageId?) {
+  public setLanguageById(languageId?) {
     console.log(languageId);
     switch (languageId) {
       case "1":
         this.selectedLanguage = {
-          name: "English",
+          name: "EN",
           id: "1"
         };
         break;
       case "2":
         console.log("frenc");
         this.selectedLanguage = {
-          name: "Francais",
+          name: "FR",
           id: "2"
         };
         break;
       case "3":
         this.selectedLanguage = {
-          name: "العربية",
+          name: "AR",
           id: "3"
         };
         break;
       default:
         this.selectedLanguage = {
-          name: "English",
+          name: "EN",
           id: "1"
         };
     }

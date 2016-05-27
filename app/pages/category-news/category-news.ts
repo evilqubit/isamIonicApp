@@ -100,9 +100,9 @@ export class CategoryNewsPage {
 
   private setNameByLanguage() {
     for (let i = 0; i < this.subsubcats.length; i++) {
-      if (this._userPref.getSelectedLanguage().name === 'Francais') {
+      if (this._userPref.getSelectedLanguage().name === 'FR') {
         this.subsubcats[i].SubSubName = this.subsubcats[i].SubSubNameFr;
-      } else if (this._userPref.getSelectedLanguage().name === 'العربية') {
+      } else if (this._userPref.getSelectedLanguage().name === 'AR') {
         this.subsubcats[i].SubSubName = this.subsubcats[i].SubSubNameAr;
       }
     }
