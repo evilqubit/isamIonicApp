@@ -11,9 +11,12 @@ import { SearchPage } from '../search/search';
 
 // Modals
 import {LanguageSelectModalPage} from '../language-select-modal/language-select-modal';
+// Pipes
+import { Sort } from '../../pipes/sort';
 
 @Page({
-  templateUrl: 'build/pages/categories-list/categories-list.page.html'
+  templateUrl: 'build/pages/categories-list/categories-list.page.html',
+  pipes: [Sort]
 })
 export class CategoriesListPage {
   // Pages used for navigation
@@ -30,16 +33,17 @@ export class CategoriesListPage {
   public response;
   public partners;
 
-  constructor(private _http: Http, private _nav: NavController, private _userPref: UserPreference) {
+  constructor(private _http: Http, private _nav: NavController, public _userPref: UserPreference) {
     this.sliderOptions = {
       slidesPerView: 3,
       freeMode: true, // boolean	false	If true then slides will not have fixed positions
-      // freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
+      freeModeMomentum: true //	boolean	true	If true, then slide will keep moving for a while after you release it
     }
 
     this.adSlidesOptions = {
-      autoplay: 4000,
-      loop: false
+      autoplay: 8000,
+      loop: false,
+      speed: 200
     };
   }
 
@@ -62,7 +66,6 @@ export class CategoriesListPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        console.log('done');
       });
   }
 
@@ -109,13 +112,21 @@ export class CategoriesListPage {
               if (data.results[i].subcat[j] === null) {
                 data.results[i].subcat.splice(j, 1);
                 j = 0;
+              } else {
+                if (data.results[i].subcat[j].subsubcat) {
+                  for (let k = 0; k < data.results[i].subcat[j].subsubcat.length; k++) {
+                    if (data.results[i].subcat[j].subsubcat[k] === null) {
+                      data.results[i].subcat[j].subsubcat.splice(k, 1);
+                      k = 0;
+                    }
+                  }
+                }
               }
             }
           }
         }
         this.setNameByLanguage(data);
         this.response = data.results;
-        console.log(data);
 
       },
       error => console.log(error),
@@ -144,12 +155,12 @@ export class CategoriesListPage {
 
   private setNameByLanguage(categoryData) {
     for (let i = 0; i < categoryData.results.length; i++) {
-      if (this._userPref.getSelectedLanguage().name === 'Francais') {
+      if (this._userPref.getSelectedLanguage().name === 'FR') {
         categoryData.results[i].categoryName = categoryData.results[i].categoryNameFr;
         for (let j = 0; j < categoryData.results[i].subcat.length; j++) {
           categoryData.results[i].subcat[j].SubCatName = categoryData.results[i].subcat[j].SubCatNameFr;
         }
-      } else if (this._userPref.getSelectedLanguage().name === 'العربية') {
+      } else if (this._userPref.getSelectedLanguage().name === 'AR') {
         categoryData.results[i].categoryName = categoryData.results[i].categoryNameAr;
         for (let j = 0; j < categoryData.results[i].subcat.length; j++) {
           categoryData.results[i].subcat[j].SubCatName = categoryData.results[i].subcat[j].SubCatNameAr;

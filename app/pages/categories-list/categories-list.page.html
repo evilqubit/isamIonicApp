@@ -7,7 +7,7 @@
   </ion-title>
   <ion-buttons end>
     <button (click)="presentLanguageSelectModal()">
-      <ion-icon name="globe"></ion-icon>
+      {{ _userPref.getSelectedLanguage().name }}
     </button>
     <button [navPush]="searchPage">
       <ion-icon name="search"></ion-icon>
@@ -38,7 +38,7 @@
   </ion-row>
 
   <ion-list>
-    <ion-row *ngFor="#category of response" class="CategoryList-list">
+    <ion-row *ngFor="#category of (response | sort: 'categoryOrder')" class="CategoryList-list">
       <ion-col width-100>
         <ion-list-header class="CategoryList-categoryHeader">
           {{category.categoryName | uppercase}}
