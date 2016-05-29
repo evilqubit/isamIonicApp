@@ -26,31 +26,9 @@ export class LookupGradesPage {
     if (!this.validate()) {
       return false;
     }
-    // if (this.studentNumber === "1020") {
-    //   this.studentGradeDetail = null;
-    //   let loader = Loading.create({
-    //     content: "Loading map to Center",
-    //     duration: 10000
-    //   });
-
-    //   this._nav.present(loader);
-
-    //   this.getCenterLocation("SCH-1003");
-    //   return false;
-    // } else if (this.studentNumber === "1000") {
-    //   this.studentGradeDetail = null;
-    //   let loader = Loading.create({
-    //     content: "Loading map to Center",
-    //     duration: 12000
-    //   });
-    //   this._nav.present(loader);
-
-    //   this.getCenterLocation("SCH-104");
-    //   return false;
-    // }
 
     let loading = Loading.create({
-      content: "Fetching..."
+      content: "Fetching...",
     });
 
     this._nav.present(loading);
@@ -64,12 +42,12 @@ export class LookupGradesPage {
       }, () => {
         if (this.studentGradeDetail === null) {
           window.alert(`رقم المرشح ${this.studentNumber} غير موجود`);
+          this.currentCenterLocation = null;
           loading.dismiss();
         } else if (!this.studentGradeDetail.grand_total) {
           window.alert(`النتائج لم تصدر بعد`);
-          this.getCenterLocation(this.studentGradeDetail.centerID);
+          this.getCenterLocation(this.studentGradeDetail.centerID, loading);
           this.studentGradeDetail = null;
-          loading.dismiss();
         } else {
           this.chosenStudentNumber = this.studentNumber;
           this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
@@ -79,11 +57,14 @@ export class LookupGradesPage {
 
   public getDirections() {
     let loader = Loading.create({
-      content: "Getting directions"
+      content: "Getting directions",
+      duration: 6000
     });
+
     this._nav.present(loader);
 
     let centerlatLng = new google.maps.LatLng(this.currentCenterLocation.latitude, this.currentCenterLocation.longitude);
+
     let directions = {
       origin: null,
       destination: centerlatLng,
@@ -123,7 +104,7 @@ export class LookupGradesPage {
     });
   }
 
-  private getSchoolInfo(schoolId, loader) {
+  private getSchoolInfo(schoolId: string, loading: Loading) {
     this._http.get(`https://mehe.firebaseio.com/schools/${schoolId}.json`)
       .map(res => res.json())
       .subscribe((school) => {
@@ -131,7 +112,7 @@ export class LookupGradesPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        loader.dismiss();
+        loading.dismiss();
       });
   }
 
@@ -143,14 +124,7 @@ export class LookupGradesPage {
     return true;
   }
 
-  private getCenterLocation(centerId: string) {
-    let loader = Loading.create({
-      content: "Loading map to Center",
-      duration: 10000
-    });
-
-    this._nav.present(loader);
-
+  private getCenterLocation(centerId: string, loading: Loading) {
     this._http.get(`https://mehe.firebaseio.com/centers/${centerId}.json`)
       .map(res => res.json())
       .subscribe((centerInfo) => {
@@ -160,9 +134,14 @@ export class LookupGradesPage {
           centerName: centerInfo.name
         };
       }, (error) => {
+        loading.dismiss();
         console.log(error);
       }, () => {
-        this.loadMap(this.currentCenterLocation.latitude, this.currentCenterLocation.longitude, this.currentCenterLocation.centerName);
+        loading.dismiss();
+        this.loadMap(
+          this.currentCenterLocation.latitude,
+          this.currentCenterLocation.longitude,
+          this.currentCenterLocation.centerName);
       });
   }
 
