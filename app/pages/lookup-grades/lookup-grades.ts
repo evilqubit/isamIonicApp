@@ -62,18 +62,18 @@ export class LookupGradesPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        this.chosenStudentNumber = this.studentNumber;
-        loading.dismiss();
         if (this.studentGradeDetail === null) {
           window.alert(`رقم المرشح ${this.studentNumber} غير موجود`);
-          return false;
+          loading.dismiss();
         } else if (!this.studentGradeDetail.grand_total) {
           window.alert(`النتائج لم تصدر بعد`);
           this.getCenterLocation(this.studentGradeDetail.centerID);
           this.studentGradeDetail = null;
-          return false;
+          loading.dismiss();
+        } else {
+          this.chosenStudentNumber = this.studentNumber;
+          this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
         }
-        this.getSchoolInfo(this.studentGradeDetail.schoolID, loading);
       });
   }
 
@@ -114,6 +114,12 @@ export class LookupGradesPage {
           alert('Google route unsuccesfull!');
         }
       });
+    }, (error) => {
+      console.log(error);
+      if (error.code === 1) {
+        window.alert("Please allow the application to use your location");
+      }
+      loader.dismiss();
     });
   }
 
