@@ -102,14 +102,16 @@ export class CategoriesListPage {
     requestHeaders.append("X-Parse-Application-Id", "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou");
     requestHeaders.append("X-Parse-REST-API-Key", "M33K2sDFgY0yT3IniowcLnlKuPqxUgSB6qEmYwmx");
     // where={"langId": ${this._userPref.getSelectedLanguage().id}}&
-    this._http.get(`https://api.parse.com/1/classes/Category?include=subcat,subcat.subsubcat`, {
+    this._http.get(`https://api.parse.com/1/classes/Category?where={
+      "status": 1
+      }&include=subcat,subcat.subsubcat`, {
       headers: requestHeaders
     }).map(res => res.json())
       .subscribe((data) => {
         for (let i = 0; i < data.results.length; i++) {
           if (data.results[i].subcat) {
             for (let j = 0; j < data.results[i].subcat.length; j++) {
-              if (data.results[i].subcat[j] === null) {
+              if (data.results[i].subcat[j] === null || data.results[i].subcat[j].status === 0) {
                 data.results[i].subcat.splice(j, 1);
                 j = 0;
               } else {
