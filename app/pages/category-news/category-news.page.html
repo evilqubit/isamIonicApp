@@ -5,8 +5,8 @@
 <ion-content class="Category-news">
   <ion-list>
 
-    <ion-item *ngIf="subsubcats">
-      <ion-label>Filter</ion-label>
+    <ion-item *ngIf="subsubcats" class="Category-newsFilters">
+      <ion-label class="Category-newsFilterLabel">Filter</ion-label>
       <ion-select [(ngModel)]="newsFilter" (change)="filterNews()">
         <ion-option value="All">
           All
