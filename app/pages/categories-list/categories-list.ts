@@ -43,7 +43,7 @@ export class CategoriesListPage {
     this.adSlidesOptions = {
       autoplay: 8000,
       loop: false,
-      speed: 200
+      speed: 1000
     };
   }
 
