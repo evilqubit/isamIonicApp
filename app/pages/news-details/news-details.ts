@@ -23,9 +23,9 @@ export class NewsDetailsPage {
   onPageLoaded() {
     this.newsDetails = this._navParams.get("newsObject");
     this.newsDetails.parsedLongContent = this.parseLongContent(this.newsDetails.longContent);
-    this.newsDetails.youtubeLinks = JSON.parse(this.newsDetails.youtubeLinks);
-    this.newsDetails.relatedLinks = JSON.parse(this.newsDetails.relatedLinks);
-    this.newsDetails.iframeLinks = JSON.parse(this.newsDetails.iframeLinks);
+    this.newsDetails.youtubeLinks = this.newsDetails.youtubeLinks ? JSON.parse(this.newsDetails.youtubeLinks) : [];
+    this.newsDetails.relatedLinks = this.newsDetails.relatedLinks ? JSON.parse(this.newsDetails.relatedLinks) : [];
+    this.newsDetails.iframeLinks = this.newsDetails.iframeLinks ? JSON.parse(this.newsDetails.iframeLinks) : [];
     console.log(this.newsDetails);
     // this.getNewsDetails();
   }
