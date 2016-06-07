@@ -9,10 +9,20 @@
 </ion-navbar>
 
 <ion-content padding class="quizz-start">
+  <ion-row center>
+    <ion-col>
+      <ion-item>
+        Question {{questionIndex + 1}} of {{ quizz.quizQuestions.length }}
+        <button small primary outline round item-right>
+        Time left: {{ timer }}
+        </button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
   <ion-slides #quizzSlider [options]="quizzSlidesOptions">
     <ion-slide *ngFor="#quizzQuestion of quizz.quizQuestions">
       <ion-card>
-        <img *ngIf="quizzQuestion.questionPicture" [src]="quizzQuestion.questionPicture"/>
+        <img *ngIf="quizzQuestion.questionPicture" [src]="quizzQuestion.questionPicture" />
         <ion-card-header text-wrap class="QuizzStart-questionTitle">
           {{quizzQuestion.questionText}}
         </ion-card-header>

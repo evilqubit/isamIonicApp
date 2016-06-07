@@ -2,7 +2,6 @@ import {Page, NavController, NavParams, Slides, Loading} from 'ionic-angular';
 import {ViewChild} from 'angular2/core';
 import {Http, Headers} from 'angular2/http';
 
-
 /*
   Generated class for the QuizzStartPage page.
 
@@ -17,9 +16,12 @@ export class QuizzStartPage {
   public quizzSlidesOptions;
   public quizzAnswers;
   public quizzAnswer: string;
+
+  public timerInterval;
+  public timer: number;
   @ViewChild('quizzSlider') public quizzSlider: Slides;
 
-  private _questionIndex: number = 0;
+  public questionIndex: number = 0;
 
   constructor(private _nav: NavController, private _navParams: NavParams, private _http: Http) {
     this.quizzSlidesOptions = {
@@ -29,19 +31,29 @@ export class QuizzStartPage {
   }
 
   public onPageLoaded() {
+    this.timer = 30;
     this.quizzAnswers = [];
     this.quizz = this._navParams.get('quizz');
     console.log(this.quizz);
+    this.startTimer();
   }
 
   public nextQuestion() {
-    this.quizzAnswers[this._questionIndex] = {
-      questionid: this.quizz.quizQuestions[this._questionIndex].objectId,
+    if (this.quizzSlider.isEnd()) {
+      this.stopTimer();
+      return;
+    }
+
+    let questionIndex = this.quizzSlider.getActiveIndex();
+    this.quizzAnswers[questionIndex] = {
+      questionid: this.quizz.quizQuestions[questionIndex].objectId,
       num: this.quizzAnswer
     };
-    this._questionIndex = this._questionIndex + 1;
     this.quizzSlider.slideNext(300, false);
     this.quizzAnswer = null;
+    this.questionIndex = questionIndex + 1;
+    this.timer = 30;
+
   }
 
   public submitQuiz() {
@@ -70,6 +82,19 @@ export class QuizzStartPage {
         console.log("Success");
         loading.dismiss();
       });
+  }
+
+  private startTimer() {
+    this.timerInterval = window.setInterval(() => {
+      this.timer = this.timer - 1;
+      if (this.timer === 0) {
+        this.nextQuestion();
+      }
+    }, 1000);
+  }
+
+  private stopTimer() {
+    window.clearInterval(this.timerInterval);
   }
 
   // public prevQuestion() {

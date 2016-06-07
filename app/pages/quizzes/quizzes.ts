@@ -1,4 +1,4 @@
-import {Page, NavController, Loading} from 'ionic-angular';
+import {Page, NavController, Loading, Alert} from 'ionic-angular';
 import { Http, Headers } from 'angular2/http';
 
 // Custom Imports
@@ -21,9 +21,28 @@ export class QuizzesPage {
   }
 
   public startQuiz(quizz) {
-    this._nav.push(QuizzStartPage, {
-      quizz: quizz
+    let quizzStartConfirm = Alert.create({
+      title: 'Start Quiz?',
+      message: `You have selected ${quizz.quizName}, are you sure you would like to start it?`,
+      buttons: [
+        {
+          text: 'Disagree',
+          handler: () => {
+            this._nav.pop();
+          }
+        },
+        {
+          text: 'Agree',
+          handler: () => {
+            this._nav.push(QuizzStartPage, {
+              quizz: quizz
+            });
+          }
+        }
+      ]
     });
+
+    this._nav.present(quizzStartConfirm);
   }
 
   private getQuizzes() {
