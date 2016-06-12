@@ -216,10 +216,10 @@
   </div>
 
   <div *ngIf="!studentGradeDetail">
-    <div id="map"></div>
     <button primary full (click)="getDirections()" *ngIf="currentCenterLocation">
       Get Directions!
     </button>
+    <div id="map"></div>
   </div>
 
 </ion-content>
