@@ -10,7 +10,7 @@
         {{newsDetails.newsTitle}}
       <h4 class="NewsDetails-authorText">{{newsDetails.authorName}}</h4>
       </ion-card-title>
-      <div *ngFor="#content of newsDetails.parsedLongContent" [innerHTML]="content.content">
+      <div *ngFor="let content of newsDetails.parsedLongContent" [innerHTML]="content.content">
       </div>
     </ion-card-content>
 
@@ -22,7 +22,7 @@
       <ion-list-header>
         Links
       </ion-list-header>
-      <ion-item class="NewsDetails-iframeLinks" text-wrap *ngFor="#link of newsDetails.iframeLinks" (click)="openLinkInSystem(link)">
+      <ion-item class="NewsDetails-iframeLinks" text-wrap *ngFor="let link of newsDetails.iframeLinks" (click)="openLinkInSystem(link)">
         {{ link }}
       </ion-item>
     </div>

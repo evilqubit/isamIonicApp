@@ -1,5 +1,6 @@
-import {Page, NavController, Loading, Modal} from 'ionic-angular';
-import {Http, Headers} from 'angular2/http';
+import {NavController, Loading, Modal} from 'ionic-angular';
+import {Http, Headers} from '@angular/http';
+import {Component} from '@angular/core';
 
 // Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";
@@ -14,7 +15,7 @@ import {LanguageSelectModalPage} from '../language-select-modal/language-select-
 // Pipes
 import { Sort } from '../../pipes/sort';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/categories-list/categories-list.page.html',
   pipes: [Sort]
 })
@@ -47,7 +48,7 @@ export class CategoriesListPage {
     };
   }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.getCategories();
     this.getSlideAds();
     this.getPartners();

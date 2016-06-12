@@ -1,15 +1,10 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
 
 //Custom
-import {InAppBrowser} from 'ionic-native';
+// import {InAppBrowser} from 'ionic-native';
 
-/*
-  Generated class for the PartnerDetailsPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Page({
+@Component({
   templateUrl: 'build/pages/partner-details/partner-details.html',
 })
 export class PartnerDetailsPage {
@@ -17,7 +12,7 @@ export class PartnerDetailsPage {
 
   constructor(private _nav: NavController, private _navParams: NavParams) { }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.partnerDetails = this._navParams.get("partnerDetails");
   }
 

@@ -1,13 +1,13 @@
 import {Page, NavController, NavParams, Loading} from "ionic-angular";
-import {Http, Headers} from 'angular2/http';
-import 'rxjs/add/operator/map';
+import {Http, Headers} from '@angular/http';
+import {Component} from '@angular/core';
 
 //Custom Imports
 import {TruncatePipe} from "../../pipes/truncate";
 import {NewsDetailsPage} from "../news-details/news-details";
 import { UserPreference } from '../../providers/user-preference/user-preference';
 
-@Page({
+@Component({
   templateUrl: "build/pages/category-news/category-news.page.html",
   pipes: [TruncatePipe]
 })
@@ -21,7 +21,7 @@ export class CategoryNewsPage {
     this.newsFilter = "All";
   }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.categoryObject = this._params.get("categoryObject");
     this.subsubcats = this.categoryObject.subsubcat;
     this.setNameByLanguage();

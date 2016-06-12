@@ -1,12 +1,11 @@
-import {Page, NavController, Loading} from 'ionic-angular';
+import {Page, NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
 
 //Custom imports
 import {CategoriesListPage} from "../categories-list/categories-list";
-import {CategoryNewsPage} from "../category-news/category-news";
-import {NewsDetailsPage} from "../news-details/news-details";
 import {LookupGradesPage} from "../lookup-grades/lookup-grades";
 
-@Page({
+@Component({
   templateUrl: 'build/pages/landing/landing.page.html'
 })
 export class LandingPage {
