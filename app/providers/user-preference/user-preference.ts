@@ -14,7 +14,6 @@ export class UserPreference {
 
   constructor() {
     this.localStorage.getJson("language").then((languageObj) => {
-      console.log(languageObj);
       if (languageObj === null) {
         this.setLanguageById();
         return false;
@@ -26,7 +25,6 @@ export class UserPreference {
   }
 
   public setLanguageById(languageId?) {
-    console.log(languageId);
     switch (languageId) {
       case "1":
         this.selectedLanguage = {
@@ -35,7 +33,6 @@ export class UserPreference {
         };
         break;
       case "2":
-        console.log("frenc");
         this.selectedLanguage = {
           name: "FR",
           id: "2"
@@ -54,9 +51,9 @@ export class UserPreference {
         };
     }
 
-    console.log(this.selectedLanguage);
-    window.localStorage.removeItem("language");
-    this.localStorage.setJson("language", this.selectedLanguage)
+    this.localStorage.remove("language").then(() => {
+      this.localStorage.setJson("language", this.selectedLanguage)
+    })
     // this.localStorage.set("language", JSON.stringify(this.selectedLanguage));
   }
 

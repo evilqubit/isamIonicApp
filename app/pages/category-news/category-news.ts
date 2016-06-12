@@ -26,7 +26,6 @@ export class CategoryNewsPage {
     this.subsubcats = this.categoryObject.subsubcat;
     this.setNameByLanguage();
 
-    console.log(this.categoryObject);
     this.getCategoryNews();
   }
 
@@ -60,11 +59,9 @@ export class CategoryNewsPage {
       }`, {
         headers: headers
       }).map(res => res.json())
-      .subscribe(data => this.cachedNews = data.results,
+      .subscribe(data => this.cachedNews = data.results.reverse(),
       (err) => console.log(err),
       () => {
-        console.log(this.cachedNews);
-        console.log("Success");
         loading.dismiss();
       });
   }
@@ -88,12 +85,10 @@ export class CategoryNewsPage {
         headers: headers
       }).map(res => res.json())
       .subscribe((data) => {
-        this.cachedNews = data.results;
+        this.cachedNews = data.results.reverse();
       },
       (err) => console.log(err),
       () => {
-        console.log(this.cachedNews);
-        console.log("Success");
         loading.dismiss();
       });
   }

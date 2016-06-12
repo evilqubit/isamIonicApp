@@ -19,7 +19,7 @@
   <ion-row>
     <ion-col>
       <ion-slides class="CategoryList-adSlider" [options]="adSlidesOptions">
-        <ion-slide tappable *ngFor="#ad of adSlides" (click)="openLinkInSystem(ad.sliderUrl)">
+        <ion-slide tappable *ngFor="#ad of (adSlides | sort: 'order')" (click)="openLinkInSystem(ad.sliderUrl)">
           <img [src]="ad.sliderImage" />
         </ion-slide>
       </ion-slides>

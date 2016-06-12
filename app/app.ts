@@ -1,8 +1,8 @@
 declare var parsePlugin, AdMob;
 
 import 'es6-shim';
-import {App, IonicApp, Platform, Modal, Page} from 'ionic-angular';
-import {StatusBar, Splashscreen} from 'ionic-native';
+import {App, IonicApp, Platform, Modal, Alert} from 'ionic-angular';
+import {StatusBar, Splashscreen, Push} from 'ionic-native';
 
 // Custom Imports
 import {CategoriesListPage} from './pages/categories-list/categories-list';
@@ -43,44 +43,13 @@ class MyApp {
   public initializeApp() {
     this.platform.ready().then(() => {
 
-      this.prepareAds();
+      // this.prepareAds();
 
       // Plugins calling
       StatusBar.styleDefault();
       Splashscreen.hide();
-      // let push = Push.init({
-      //   android: {
-      //     senderID: "12345679"
-      //   },
-      //   ios: {
-      //     alert: "true",
-      //     badge: true,
-      //     sound: 'false'
-      //   },
-      //   windows: {}
-      // });
 
-      // var applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou";
-      // var clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
-
-      // push.on('registration', (data) => {
-      //   console.log(data.registrationId);
-      // });
-
-      // push.on('notification', (data) => {
-      //   console.log(data.message);
-      //   console.log(data.title);
-      //   console.log(data.count);
-      //   console.log(data.sound);
-      //   console.log(data.image);
-      //   console.log(data.additionalData);
-      // });
-
-      // parsePlugin.initialize(applicationId, clientKey, function () {
-      // }, function (e) {
-      //   // alert('error');
-      // });
-
+      this.setupPushNotifications();
     });
   }
 
@@ -97,7 +66,7 @@ class MyApp {
     nav.present(languageSelectModal);
   }
 
-  public prepareAds() {
+  private prepareAds() {
 
     let admobid = { // for Windows Phone
       banner: '/53923969/ISAM',
@@ -110,7 +79,45 @@ class MyApp {
       position: AdMob.AD_POSITION.BOTTOM_CENTER,
       isTesting: true, // TODO: remove this line when release
       autoShow: true
-    })
+    });
+  }
+
+  private setupPushNotifications() {
+    let push = Push.init({
+      android: {
+        senderID: "12345679"
+      },
+      ios: {
+        alert: "true",
+        badge: true,
+        sound: 'false'
+      },
+      windows: {}
+    });
+
+    let applicationId = "MHY6vxyEIi4SiBZthoSjRib3WLloBwYz9nVXcsou",
+      clientKey = "UJ3W7Vky7ziZ3JDu9b5zOaZ2GKBaBr0Mnpdi33yH";
+
+    push.on('registration', (data) => {
+      console.log(data.registrationId);
+    });
+
+    push.on('notification', (data) => {
+      console.log(data);
+
+      let notifAlert = Alert.create({
+        buttons: ['Ok'],
+        message: data.message,
+        title: "Notification!"
+      });
+
+      let nav = this.app.getComponent('nav');
+      nav.present(notifAlert);
+    });
+
+    parsePlugin.initialize(applicationId, clientKey, function () {}, function (e) {
+      console.log(e);
+    });
   }
 
 }

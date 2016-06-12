@@ -18,10 +18,9 @@ export class LanguageSelectModalPage {
   public languageId;
   constructor(private _nav: NavController, private _userPref: UserPreference, private _viewCtrl: ViewController) {
     this.selectedLanguage = this._userPref.getSelectedLanguage();
-    console.log(this.selectedLanguage);
   }
 
-  dismiss(saveChanges) {
+  public dismiss(saveChanges) {
     if (saveChanges) {
       this._userPref.setLanguageById(this.languageId)
       this._viewCtrl.dismiss();

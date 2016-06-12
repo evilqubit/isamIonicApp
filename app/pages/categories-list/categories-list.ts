@@ -41,8 +41,8 @@ export class CategoriesListPage {
     }
 
     this.adSlidesOptions = {
-      autoplay: 8000,
-      loop: false,
+      autoplay: 4000,
+      loop: true,
       speed: 1000
     };
   }
@@ -134,7 +134,6 @@ export class CategoriesListPage {
       error => console.log(error),
       () => {
         loading.dismiss();
-        console.log("Success");
       });
   }
 
@@ -151,7 +150,6 @@ export class CategoriesListPage {
       }, (error) => {
         console.log(error);
       }, () => {
-        console.log('done');
       });
   }
 
