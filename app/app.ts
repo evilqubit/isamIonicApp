@@ -1,7 +1,7 @@
 declare var parsePlugin, AdMob;
 
 import 'es6-shim';
-import {App, IonicApp, Platform, Modal} from 'ionic-angular';
+import {App, IonicApp, Platform, Modal, Alert} from 'ionic-angular';
 import {StatusBar, Splashscreen, Push} from 'ionic-native';
 
 // Custom Imports
@@ -103,17 +103,18 @@ class MyApp {
     });
 
     push.on('notification', (data) => {
-      console.log(data.message);
-      console.log(data.title);
-      console.log(data.count);
-      console.log(data.sound);
-      console.log(data.image);
-      console.log(data.additionalData);
+      let notifAlert = Alert.create({
+        buttons: ['Ok'],
+        message: data.message,
+        title: "Notification!",
+      });
+
+      let nav = this.app.getComponent('nav');
+      nav.present(notifAlert);
     });
 
-    parsePlugin.initialize(applicationId, clientKey, function () {
-    }, function (e) {
-      // alert('error');
+    parsePlugin.initialize(applicationId, clientKey, function () {}, function (e) {
+      console.log(e);
     });
   }
 
