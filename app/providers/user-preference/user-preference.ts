@@ -1,5 +1,5 @@
 import { Storage, LocalStorage } from 'ionic-angular';
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 
 /*
   Generated class for the UserPreference provider.
@@ -53,7 +53,7 @@ export class UserPreference {
 
     this.localStorage.remove("language").then(() => {
       this.localStorage.setJson("language", this.selectedLanguage)
-    })
+    });
     // this.localStorage.set("language", JSON.stringify(this.selectedLanguage));
   }
 

@@ -1,4 +1,4 @@
-// import {Injectable, Pipe} from 'angular2/core';
+// import {Injectable, Pipe} from '@angular/core';
 
 // /*
 //   Generated class for the Truncate pipe.
@@ -21,7 +21,7 @@
 // }
 
 
-import {Pipe} from 'angular2/core';
+import {Pipe} from '@angular/core';
 
 /**
  * Truncate a string to the given length and append suffix.

@@ -1,16 +1,11 @@
-import {Page, NavController, ViewController} from 'ionic-angular';
+import {NavController, ViewController} from 'ionic-angular';
+import {Component} from '@angular/core';
 
-//Custom imports
+// Custom imports
 import { UserPreference } from '../../providers/user-preference/user-preference';
 import { CategoriesListPage } from '../categories-list/categories-list';
 
-/*
-  Generated class for the LanguageSelectModalPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Page({
+@Component({
   templateUrl: 'build/pages/language-select-modal/language-select-modal.html',
 })
 export class LanguageSelectModalPage {

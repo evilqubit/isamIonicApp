@@ -1,22 +1,18 @@
-import {Page, NavController, Loading, Alert} from 'ionic-angular';
-import { Http, Headers } from 'angular2/http';
+import {NavController, Loading, Alert} from 'ionic-angular';
+import {Component} from '@angular/core';
+import { Http, Headers } from '@angular/http';
 
 // Custom Imports
 import { QuizzStartPage } from '../quizz-start/quizz-start';
-/*
-  Generated class for the QuizzesPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Page({
+@Component({
   templateUrl: 'build/pages/quizzes/quizzes.html',
 })
 export class QuizzesPage {
   public quizzes;
   constructor(private _nav: NavController, private _http: Http) { }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.getQuizzes();
   }
 

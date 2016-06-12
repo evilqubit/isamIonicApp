@@ -19,7 +19,7 @@
   <ion-row>
     <ion-col>
       <ion-slides class="CategoryList-adSlider" [options]="adSlidesOptions">
-        <ion-slide tappable *ngFor="#ad of (adSlides | sort: 'order')" (click)="openLinkInSystem(ad.sliderUrl)">
+        <ion-slide tappable *ngFor="let ad of (adSlides | sort: 'order')" (click)="openLinkInSystem(ad.sliderUrl)">
           <img [src]="ad.sliderImage" />
         </ion-slide>
       </ion-slides>
@@ -38,13 +38,13 @@
   </ion-row>
 
   <ion-list>
-    <ion-row *ngFor="#category of (response | sort: 'categoryOrder')" class="CategoryList-list">
+    <ion-row *ngFor="let category of (response | sort: 'categoryOrder')" class="CategoryList-list">
       <ion-col width-100>
         <ion-list-header class="CategoryList-categoryHeader">
           {{category.categoryName | uppercase}}
         </ion-list-header>
         <ion-slides [options]="sliderOptions" *ngIf="category.subcat">
-          <ion-slide tappable class="CategoryList-categorySlider" *ngFor="#subcategory of category.subcat" (click)="showSubcategoryNews(subcategory)">
+          <ion-slide tappable class="CategoryList-categorySlider" *ngFor="let subcategory of category.subcat" (click)="showSubcategoryNews(subcategory)">
             <div [ngStyle]="{'background': subcategory.SubCatColor}">
               <img class="CategoryList-categoryIcon" *ngIf="subcategory.SubCatIcon" [src]="subcategory.SubCatIcon" />
             </div>
@@ -65,7 +65,7 @@
           PARTNERS
         </ion-list-header>
         <ion-slides class="CategoryList-categorySlider" [options]="sliderOptions">
-          <ion-slide tappable *ngFor="#partner of partners" class="CategoryList-categoryItemSlide" (click)="showPartnerDetails(partner)">
+          <ion-slide tappable *ngFor="let partner of partners" class="CategoryList-categoryItemSlide" (click)="showPartnerDetails(partner)">
             <div [ngStyle]="{'background': '#fff'}">
               <img class="CategoryList-categoryIcon" [src]="partner.partnerImage" />
             </div>

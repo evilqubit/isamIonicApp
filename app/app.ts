@@ -1,8 +1,8 @@
 declare var parsePlugin, AdMob;
 
-import 'es6-shim';
-import {App, IonicApp, Platform, Modal, Alert} from 'ionic-angular';
+import {App, Platform, Modal, Alert, ionicBootstrap, Nav} from 'ionic-angular';
 import {StatusBar, Splashscreen, Push} from 'ionic-native';
+import {Component, ViewChild} from '@angular/core';
 
 // Custom Imports
 import {CategoriesListPage} from './pages/categories-list/categories-list';
@@ -16,17 +16,16 @@ import { ResourcesPage } from './pages/resources/resources';
 // Modals
 import {LanguageSelectModalPage} from './pages/language-select-modal/language-select-modal';
 
-@App({
-  templateUrl: 'build/app.html',
-  config: {},
-  providers: [UserPreference],
-  prodMode: true // TODO change to true before release
+@Component({
+  templateUrl: 'build/app.html'
 })
 class MyApp {
+  @ViewChild(Nav) public nav: Nav;
+
   public rootPage = CategoriesListPage;
   public pages: Array<{ title: string, component: any }>;
 
-  constructor(private app: IonicApp, private platform: Platform, public userPref: UserPreference) {
+  constructor(private app: App, private platform: Platform, public userPref: UserPreference) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -38,6 +37,7 @@ class MyApp {
       // { title: 'Files & Resources', component: ResourcesPage },
       { title: 'Find Grades', component: LookupGradesPage }
     ];
+    console.log(userPref);
   }
 
   public initializeApp() {
@@ -49,21 +49,19 @@ class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-      this.setupPushNotifications();
+      // this.setupPushNotifications();
     });
   }
 
   public openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    let nav = this.app.getComponent('nav');
-    nav.setRoot(page.component);
+    this.nav.setRoot(page.component);
   }
 
   public presentLanguageSelectModal() {
-    let nav = this.app.getComponent('nav');
     let languageSelectModal = Modal.create(LanguageSelectModalPage);
-    nav.present(languageSelectModal);
+    this.nav.present(languageSelectModal);
   }
 
   private prepareAds() {
@@ -111,13 +109,20 @@ class MyApp {
         title: "Notification!"
       });
 
-      let nav = this.app.getComponent('nav');
-      nav.present(notifAlert);
+      this.nav.present(notifAlert);
     });
 
-    parsePlugin.initialize(applicationId, clientKey, function () {}, function (e) {
+    parsePlugin.initialize(applicationId, clientKey, function () { }, function (e) {
       console.log(e);
     });
   }
-
 }
+
+// Pass the main app component as the first argument
+// Pass any providers for your app in the second argument
+// Set any config for your app as the third argument:
+// http://ionicframework.com/docs/v2/api/config/Config/
+
+ionicBootstrap(MyApp, [UserPreference], {
+  prodMode: true
+});

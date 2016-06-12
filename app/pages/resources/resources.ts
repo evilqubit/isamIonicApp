@@ -1,20 +1,15 @@
-import {Page, NavController, Loading} from 'ionic-angular';
-import {Http, Headers} from 'angular2/http';
+import {NavController, Loading} from 'ionic-angular';
+import {Http, Headers} from '@angular/http';
+import {Component} from '@angular/core';
 
-/*
-  Generated class for the ResourcesPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Page({
+@Component({
   templateUrl: 'build/pages/resources/resources.html'
 })
 export class ResourcesPage {
   public resources;
   constructor(private _nav: NavController, private _http: Http) { }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.getResources();
   }
 

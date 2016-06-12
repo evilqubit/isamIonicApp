@@ -13,7 +13,7 @@
 
 <ion-content class="quizzes">
   <ion-list>
-    <ion-item *ngFor="#quizz of quizzes" (click)="startQuiz(quizz)">
+    <ion-item *ngFor="let quizz of quizzes" (click)="startQuiz(quizz)">
       {{quizz.quizName}}
       <p>{{quizz.schoolName}}</p>
     </ion-item>
