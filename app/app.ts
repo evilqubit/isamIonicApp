@@ -103,10 +103,12 @@ class MyApp {
     });
 
     push.on('notification', (data) => {
+      console.log(data);
+
       let notifAlert = Alert.create({
         buttons: ['Ok'],
         message: data.message,
-        title: "Notification!",
+        title: "Notification!"
       });
 
       let nav = this.app.getComponent('nav');
