@@ -43,7 +43,7 @@ class MyApp {
   public initializeApp() {
     this.platform.ready().then(() => {
 
-      this.prepareAds();
+      // this.prepareAds();
 
       // Plugins calling
       StatusBar.styleDefault();
