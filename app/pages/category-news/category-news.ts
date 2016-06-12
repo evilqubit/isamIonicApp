@@ -26,7 +26,6 @@ export class CategoryNewsPage {
     this.subsubcats = this.categoryObject.subsubcat;
     this.setNameByLanguage();
 
-    console.log(this.categoryObject);
     this.getCategoryNews();
   }
 

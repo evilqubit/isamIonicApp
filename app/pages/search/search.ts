@@ -43,7 +43,6 @@ export class SearchPage {
     }).map(res => res.json())
       .subscribe((data) => {
         this.searchResults = data.results;
-        console.log(this.searchResults);
       }, (error) => {
         window.alert("An error has occurred!");
         loader.dismiss();
@@ -51,7 +50,6 @@ export class SearchPage {
       },
       () => {
         loader.dismiss();
-        console.log("done");
       });
   }
 

@@ -26,7 +26,6 @@ export class NewsDetailsPage {
     this.newsDetails.youtubeLinks = this.newsDetails.youtubeLinks ? JSON.parse(this.newsDetails.youtubeLinks) : [];
     this.newsDetails.relatedLinks = this.newsDetails.relatedLinks ? JSON.parse(this.newsDetails.relatedLinks) : [];
     this.newsDetails.iframeLinks = this.newsDetails.iframeLinks ? JSON.parse(this.newsDetails.iframeLinks) : [];
-    console.log(this.newsDetails);
     // this.getNewsDetails();
   }
 

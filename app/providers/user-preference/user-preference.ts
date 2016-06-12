@@ -33,7 +33,6 @@ export class UserPreference {
         };
         break;
       case "2":
-        console.log("frenc");
         this.selectedLanguage = {
           name: "FR",
           id: "2"
