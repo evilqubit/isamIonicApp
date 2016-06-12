@@ -1,14 +1,8 @@
-import {Page, NavController, NavParams, Slides, Loading} from 'ionic-angular';
-import {ViewChild} from 'angular2/core';
-import {Http, Headers} from 'angular2/http';
+import {NavController, NavParams, Slides, Loading} from 'ionic-angular';
+import {ViewChild, Component} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 
-/*
-  Generated class for the QuizzStartPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-@Page({
+@Component({
   templateUrl: 'build/pages/quizz-start/quizz-start.html',
 })
 export class QuizzStartPage {
@@ -30,7 +24,7 @@ export class QuizzStartPage {
     };
   }
 
-  public onPageLoaded() {
+  public ionViewLoaded() {
     this.timer = 30;
     this.quizzAnswers = [];
     this.quizz = this._navParams.get('quizz');

@@ -1,10 +1,11 @@
-import {Page, NavController, Loading} from 'ionic-angular';
-import {Http} from 'angular2/http';
+import {NavController, Loading} from 'ionic-angular';
+import {Http} from '@angular/http';
+import {Component} from '@angular/core';
 import {Geolocation} from 'ionic-native';
 
 declare var google;
 
-@Page({
+@Component({
   templateUrl: 'build/pages/lookup-grades/lookup-grades.html'
 })
 export class LookupGradesPage {

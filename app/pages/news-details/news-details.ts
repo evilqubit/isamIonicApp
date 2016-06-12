@@ -1,11 +1,10 @@
-import {Page, NavController, NavParams, Loading} from "ionic-angular";
-import {Http, Headers} from 'angular2/http';
-import 'rxjs/add/operator/map';
+import {NavController, NavParams} from "ionic-angular";
+import {Component} from '@angular/core';
 
 //Custom imports
-import {InAppBrowser} from 'ionic-native';
+// import {InAppBrowser} from 'ionic-native';
 
-@Page({
+@Component({
   templateUrl: "build/pages/news-details/news-details.page.html",
 })
 export class NewsDetailsPage {
@@ -15,12 +14,11 @@ export class NewsDetailsPage {
   private objectId: string;
 
   constructor(
-    private _http: Http,
     private _nav: NavController,
     private _navParams: NavParams
   ) { }
 
-  onPageLoaded() {
+  public ionViewLoaded() {
     this.newsDetails = this._navParams.get("newsObject");
     this.newsDetails.parsedLongContent = this.parseLongContent(this.newsDetails.longContent);
     this.newsDetails.youtubeLinks = this.newsDetails.youtubeLinks ? JSON.parse(this.newsDetails.youtubeLinks) : [];

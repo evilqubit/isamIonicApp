@@ -20,14 +20,14 @@
     </ion-col>
   </ion-row>
   <ion-slides #quizzSlider [options]="quizzSlidesOptions">
-    <ion-slide *ngFor="#quizzQuestion of quizz.quizQuestions">
+    <ion-slide *ngFor="let quizzQuestion of quizz.quizQuestions">
       <ion-card>
         <img *ngIf="quizzQuestion.questionPicture" [src]="quizzQuestion.questionPicture" />
         <ion-card-header text-wrap class="QuizzStart-questionTitle">
           {{quizzQuestion.questionText}}
         </ion-card-header>
         <ion-list radio-group [(ngModel)]="quizzAnswer">
-          <ion-item *ngFor="#choice of quizzQuestion.questionChoices">
+          <ion-item *ngFor="let choice of quizzQuestion.questionChoices">
             <ion-label>{{choice.choice}}</ion-label>
             <ion-radio value="{{choice.num}}"></ion-radio>
           </ion-item>

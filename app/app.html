@@ -20,25 +20,25 @@
       </ion-col>
     </ion-row>-->
 
-    <button menuClose ion-item *ngFor="#page of pages" (click)="openPage(page)">
+    <button menuClose ion-item *ngFor="let page of pages" (click)="openPage(page)">
             {{page.title}}
     </button>
     <!--<ion-list>
       <ion-list-header>
         CATEGORIES
       </ion-list-header>
-      <button menuClose ion-item *ngFor="#categoriesPage of categoriesPages" (click)="openPage(categoriesPage)">
+      <button menuClose ion-item *ngFor="let categoriesPage of categoriesPages" (click)="openPage(categoriesPage)">
                 {{categoriesPage.title}}
             </button>
     </ion-list>-->
 
   </ion-content>
 
-  <ion-toolbar position="bottom" menuClose (click)="presentLanguageSelectModal()">
+  <!--<ion-toolbar position="bottom" menuClose (click)="presentLanguageSelectModal()">
     <ion-title>
       {{ userPref.selectedLanguage.name }}
     </ion-title>
-  </ion-toolbar>
+  </ion-toolbar>-->
 
 </ion-menu>
 
