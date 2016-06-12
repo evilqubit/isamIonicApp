@@ -41,8 +41,8 @@ export class CategoriesListPage {
     }
 
     this.adSlidesOptions = {
-      autoplay: 8000,
-      loop: false,
+      autoplay: 4000,
+      loop: true,
       speed: 1000
     };
   }
