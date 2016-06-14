@@ -36,19 +36,35 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-inappbrowser",
     {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
       "variables": {
         "SENDER_ID": "123456"
-      },
-      "locator": "phonegap-plugin-push",
-      "id": "phonegap-plugin-push"
+      }
     },
     "cordova-plugin-admobpro",
+    "cordova-plugin-extension",
     "cordova-plugin-device-orientation",
-    "cordova-plugin-geolocation"
+    "cordova-plugin-geolocation",
+    "cordova-plugin-compat",
+    {
+      "locator": "https://github.com/avivais/phonegap-parse-plugin",
+      "id": "com.parse.cordova.core.pushplugin"
+    }
   ],
   "cordovaPlatforms": [
     "android",
-    "ios"
+    "ios",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ],
   "name": "isam",
   "description": "ISAM: An Ionic 2 project",
