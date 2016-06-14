@@ -37,19 +37,18 @@ class MyApp {
       // { title: 'Files & Resources', component: ResourcesPage },
       { title: 'Find Grades', component: LookupGradesPage }
     ];
-    console.log(userPref);
   }
 
   public initializeApp() {
     this.platform.ready().then(() => {
 
-      // this.prepareAds();
 
       // Plugins calling
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-      // this.setupPushNotifications();
+      this.setupPushNotifications();
+      this.prepareAds();
     });
   }
 
