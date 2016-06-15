@@ -1,6 +1,7 @@
 import {NavController, Loading} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import {Component} from '@angular/core';
+import 'rxjs/add/operator/map';
 
 @Component({
   templateUrl: 'build/pages/resources/resources.html'

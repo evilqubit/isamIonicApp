@@ -1,6 +1,7 @@
-import {Page, NavController, NavParams, Loading} from "ionic-angular";
+import {NavController, NavParams, Loading} from "ionic-angular";
 import {Http, Headers} from '@angular/http';
 import {Component} from '@angular/core';
+import 'rxjs/add/operator/map';
 
 //Custom Imports
 import {TruncatePipe} from "../../pipes/truncate";

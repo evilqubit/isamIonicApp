@@ -1,6 +1,7 @@
 import {NavController, Loading, Alert} from 'ionic-angular';
 import {Component} from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 // Custom Imports
 import { QuizzStartPage } from '../quizz-start/quizz-start';

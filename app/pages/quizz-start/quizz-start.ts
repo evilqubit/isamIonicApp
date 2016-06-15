@@ -1,6 +1,7 @@
 import {NavController, NavParams, Slides, Loading} from 'ionic-angular';
 import {ViewChild, Component} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   templateUrl: 'build/pages/quizz-start/quizz-start.html',

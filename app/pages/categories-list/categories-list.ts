@@ -1,6 +1,7 @@
 import {NavController, Loading, Modal} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import {Component} from '@angular/core';
+import 'rxjs/add/operator/map';
 
 // Custom imports
 import {CategoryNewsPage} from "../category-news/category-news";

@@ -2,6 +2,7 @@ import {NavController, Loading} from 'ionic-angular';
 import {Http} from '@angular/http';
 import {Component} from '@angular/core';
 import {Geolocation} from 'ionic-native';
+import 'rxjs/add/operator/map';
 
 declare var google;
 

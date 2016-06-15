@@ -68,7 +68,7 @@ class MyApp {
     let admobid = { // for Windows Phone
       banner: '/53923969/ISAM',
       // banner: 'ca-app-pub-6869992474017983/9375997553',
-      interstitial: '/53923969/ISAM-300'
+      interstitial: '/53923969/ISAM-Intersticial-Inside'
     };
 
     AdMob.createBanner({

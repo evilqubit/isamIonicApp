@@ -1,5 +1,6 @@
 import {NavController, NavParams} from "ionic-angular";
 import {Component} from '@angular/core';
+import 'rxjs/add/operator/map';
 
 //Custom imports
 // import {InAppBrowser} from 'ionic-native';
